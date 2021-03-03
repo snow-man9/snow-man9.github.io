@@ -163,10 +163,8 @@
 </blockquote>
 <p>静态局部变量使用static修饰符定义，即使在声明时未赋初值，编译器也会把它初始化为0。且静态局部变量存储于进程的全局数据区，即使函数返回，它的值也会保持不变。</p>
 <p>小程序试一试（大一上期末考过类似的）</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">......自己臆想吧</span><br></pre></td></tr></table></figure>
 
-
-<p>————————————————</p>
 <p>运行结果如下：</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">n=<span class="number">10</span></span><br><span class="line">n++=<span class="number">11</span></span><br><span class="line">--------------------</span><br><span class="line"><span class="keyword">static</span> n=<span class="number">10</span></span><br><span class="line">n++=<span class="number">11</span></span><br><span class="line">--------------------</span><br><span class="line">n=<span class="number">10</span></span><br><span class="line">n++=<span class="number">11</span></span><br><span class="line">--------------------</span><br><span class="line"><span class="keyword">static</span> n=<span class="number">11</span></span><br><span class="line">n++=<span class="number">12</span></span><br></pre></td></tr></table></figure>
 
@@ -200,7 +198,6 @@
 
 
 <h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>写下来感觉static还是很有用的（虽然我没用过），能够将代码模块化，达到所谓的松耦合。</p>
-<p>[]: <a target="_blank" rel="noopener" href="https://blog.csdn.net/guotianqing/article/details/79828100?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522161477274316780265480422%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;amp;request_id=161477274316780265480422&amp;amp;biz_id=0&amp;amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-79828100.pc_search_result_before_js&amp;amp;utm_term=c+static">https://blog.csdn.net/guotianqing/article/details/79828100?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522161477274316780265480422%2522%252C%2522scm%2522%253A%252220140713.130102334..%2522%257D&amp;amp;request_id=161477274316780265480422&amp;amp;biz_id=0&amp;amp;utm_medium=distribute.pc_search_result.none-task-blog-2~all~sobaiduend~default-1-79828100.pc_search_result_before_js&amp;amp;utm_term=c+static</a></p>
 
       
 
