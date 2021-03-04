@@ -20,7 +20,7 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-  <title>C中static的运用 - Hexo</title>
+  <title>安全多方计算的初认识 - Hexo</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -165,7 +165,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="C中static的运用">
+            <span class="h2" id="subtitle" title="安全多方计算的初认识">
               
             </span>
 
@@ -175,8 +175,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-03-03 19:57" pubdate>
-        March 3, 2021 pm
+      <time datetime="2021-03-04 18:05" pubdate>
+        March 4, 2021 pm
       </time>
     </span>
   
@@ -187,7 +187,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      819 字
+      750 字
     </span>
   
 
@@ -197,7 +197,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      7
        分钟
     </span>
   
@@ -227,50 +227,27 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">C中static的运用</h1>
+            <h1 style="display: none">安全多方计算的初认识</h1>
             
             <div class="markdown-body">
-              <h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><h5 id="1-局部变量"><a href="#1-局部变量" class="headerlink" title="1.局部变量"></a>1.局部变量</h5><p>定义在函数内部的变量（不加static修饰）属于这个范畴。编译器一般不对普通局部变量进行初始化，也就是说它的值在初始时是不确定的，除非对其显式赋值（啥意思？）。</p>
+              <h5 id="安全多方计算"><a href="#安全多方计算" class="headerlink" title="安全多方计算"></a>安全多方计算</h5><p>安全多方计算最初是针对一个安全两方计算问题，即所谓的“百万富翁问题”而被提出的（姚期智）。在安全多方计算中，目的是协同地从没一方的隐私输入中计算函数的结果。而不用将这些输入展示给其他方。安全多方计算告诉我们，对于任何功能需求，我们都可以在不必显示除了输出以外的前提下计算它。</p>
+<p>为了了解安全多方计算，让我们先看两个场景例子: </p>
+<p>（1）Alice认为她的了某种遗传疾病，想验证自己的想法。正好她知道Bob有一个关于疾病的DNA模型的数据库。如果她把自己的DNA样品寄给Bob，那么Bob可以给出她的DNA的诊断结果。但是Alice又不想别人知道，这是她的隐私。所以，她请求Bob帮忙诊断自己DNA的方式是不可行的。因为这样Bob就知道了她的DNA及相关私人信息。</p>
+<p>（2）两个金融组织计划为了共同的利益决定互相合作一个项目。每个组织都想自己的需求获得满足。然而，他们的需求都是他们自己专有的数据，没人愿意透露给其他方，甚至是“信任”的第三方。那么他们如何在保护数据私密性的前提下合作项目呢？</p>
 <blockquote>
-<p>普通局部变量存储于进程栈空间，使用完毕会立即释放。</p>
+<p><strong>当前，解决上述问题的策略是假设有可信任的服务提供者或是假设存在可信任的第三方。但是在目前多变和充满恶意的环境中，这是极具风险的。因此，可以支持联合计算并保护参与者私密的协议变的日益重要。</strong></p>
 </blockquote>
-<p>静态局部变量使用static修饰符定义，即使在声明时未赋初值，编译器也会把它初始化为0。且静态局部变量存储于进程的全局数据区，即使函数返回，它的值也会保持不变。</p>
-<p>小程序试一试（大一上期末考过类似的）</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">......自己臆想吧<br></code></pre></td></tr></table></figure>
-
-<p>运行结果如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c">n=<span class="hljs-number">10</span><br>n++=<span class="hljs-number">11</span><br>--------------------<br><span class="hljs-keyword">static</span> n=<span class="hljs-number">10</span><br>n++=<span class="hljs-number">11</span><br>--------------------<br>n=<span class="hljs-number">10</span><br>n++=<span class="hljs-number">11</span><br>--------------------<br><span class="hljs-keyword">static</span> n=<span class="hljs-number">11</span><br>n++=<span class="hljs-number">12</span><br></code></pre></td></tr></table></figure>
-
-<p>由此可见，静态局部变量的效果跟全局变量有得一拼，而且位于函数体内部，就有利于程序的模块化了。</p>
-<h5 id="2-全局变量"><a href="#2-全局变量" class="headerlink" title="2.全局变量"></a>2.全局变量</h5><p>全局变量定义在函数体外部，在全局数据区分配存储空间，且编译器会自动对其初始化。</p>
-<p>普通全局变量对整个工程可见，其他文件可以使用<strong>extern</strong>外部声明后直接使用。也就是说其他文件不能再定义一个与其相同名字的变量了（否则编译器会认为它们是同一个变量）。</p>
-<p>静态全局变量仅对当前文件可见，其他文件不可访问，其他文件可以定义与其同名的变量，两者互不影响。</p>
+<p><img src="C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20210304193735082.png" srcset="/img/loading.gif" alt="image-20210304193735082"></p>
+<p>证明安全多方学习计算协议是安全的标准方法为仿真范式。为了证明安全多方计算协议再仿真范式下可以抵御使t方腐败的敌手，需要构建一个模拟器，当给定t个勾结放的输入输出时，生成t个交互序列，从而使生成的交互序列与实际协议中生成的交互序列之间无法区分。</p>
+<p>通常情况下，安全多方计算能够通过三种不同的框架来实现：不经意传输、秘密共享和阈值同态加密。</p>
 <blockquote>
-<p>在定义不需要与其他文件共享的全局变量时，加上static关键字能够有效地降低程序模块之间的耦合，避免不同文件同名变量的冲突，且不会误使用。</p>
+<p>从某种程度上讲，不经意传输协议和阈值同态加密方法都使用了秘密共享的思想，这可能就是为什么秘密共享被广泛认为是安全多方计算的核心。</p>
 </blockquote>
-<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>函数的使用方式与全局变量类似，在函数的返回类型前加上static，就是静态函数。其特性如下： </p>
-<ul>
-<li>静态函数只能在声明它的文件中可见，其他文件不能引用该函数</li>
-<li>不同的文件可以使用相同名字的静态函数，互不影响</li>
-</ul>
-<blockquote>
-<p><em><strong>非</strong></em>静态函数可以在另一个文件中直接引用，甚至不必使用extern声明</p>
-</blockquote>
-<p>非静态函数可以在另一个文件中直接引用，甚至不必使用extern声明： </p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* file1.c */</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;hello from fun.\n&quot;</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;<br>    fun();<br>    fun1();<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">/* file2.c */</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fun1</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;hello from static fun1.\n&quot;</span>);<br>&#125;<br><br></code></pre></td></tr></table></figure>
-
-<p>使用 <code>gcc file1.c file2.c</code>编译时，错误报告如下：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">/tmp/cc2VMzGR.o：在函数‘main’中： <br>static_fun.c:(.text+<span class="hljs-number">0x20</span>)：对‘fun1’未定义的引用<br>collect2: error: ld returned <span class="hljs-number">1</span> <span class="hljs-built_in">exit</span> status<br></code></pre></td></tr></table></figure>
-
-<p>修改文件，不使用static修饰符，可在另一文件中引用该函数：</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* file1.c */</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;hello from fun.\n&quot;</span>);<br>&#125;<br><br><span class="hljs-comment">/* file2.c */</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;<br>    fun();<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure>
-
-<p>同样使用 <code>gcc file1.c file2.c</code>编译，编译通过，运行结果如下： </p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">-&gt; % ./a.out <br>hello from fun.<br></code></pre></td></tr></table></figure>
-
-
-
-<h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>写下来感觉static还是很有用的（虽然我没用过），能够将代码模块化，达到所谓的松耦合。</p>
+<p><img src="C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20210304204437481.png" srcset="/img/loading.gif" alt="image-20210304204437481"></p>
+<h5 id="同态加密"><a href="#同态加密" class="headerlink" title="同态加密"></a>同态加密</h5><p>同态加密方法H是一种通过对相关密文进行有效的操作（不需获知解密密钥），从而允许在加密内容上进行特定代数运算的加密方法。</p>
+<p>…….</p>
+<p>这篇先不深入解释同态加密。</p>
+<p>over</p>
 
             </div>
             <hr>
@@ -291,18 +268,12 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/03/03/3.3%E7%9A%84%E6%84%9F%E6%83%B3/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">无题</span>
-                        <span class="visible-mobile">Previous</span>
-                      </a>
-                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/03/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/">
-                        <span class="hidden-mobile"></span>
+                      <a href="/2021/03/03/3.3%E7%9A%84%E6%84%9F%E6%83%B3/">
+                        <span class="hidden-mobile">无题</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
