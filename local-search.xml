@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2021/03/03/3.3%E7%9A%84%E6%84%9F%E6%83%B3/"/>
+    <url>/2021/03/03/3.3%E7%9A%84%E6%84%9F%E6%83%B3/</url>
+    
+    <content type="html"><![CDATA[<h1 id="无题"><a href="#无题" class="headerlink" title="无题"></a>无题</h1><h5 id="写这个只是为了回忆一下今天的所作所为，起到一个警醒作用吧！"><a href="#写这个只是为了回忆一下今天的所作所为，起到一个警醒作用吧！" class="headerlink" title="写这个只是为了回忆一下今天的所作所为，起到一个警醒作用吧！"></a>写这个只是为了回忆一下今天的所作所为，起到一个警醒作用吧！</h5><ul><li>今天就两节课，一节微积分，一节离散。</li></ul><p>微积分还算好好听了，这个老师（高中喜）讲的课还算听得下去，感觉女的数学老师教学水平就那样，或者说不能激发我的兴趣把。还是得好好学，没办法，虽然感觉上了大学只想打游戏，但还是有自制力的。</p><p>离散就真鸡巴水，难怪王静（大一上计算机导论的老师）都可以教。看了两节课java（沉默王二），也没看进去多少。</p><ul><li>晚上打了两三个小时游戏，输（我carry）多赢（队友carry）少。当然有点不尽兴，不过也没有办法。</li><li>明天（星期四）似乎也是两节没啥意思的课（大物和思修）。突然想看python了，感觉挺容易的，java还得多学学，而且C都不怎么会。</li><li>慢慢学吧。</li><li>0：08</li><li>over</li></ul>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2021/03/03/static/"/>
+    <url>/2021/03/03/static/</url>
+    
+    <content type="html"><![CDATA[<h1 id="C中static的运用"><a href="#C中static的运用" class="headerlink" title="C中static的运用"></a>C中static的运用</h1><h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><h5 id="1-局部变量"><a href="#1-局部变量" class="headerlink" title="1.局部变量"></a>1.局部变量</h5><p>定义在函数内部的变量（不加static修饰）属于这个范畴。编译器一般不对普通局部变量进行初始化，也就是说它的值在初始时是不确定的，除非对其显式赋值（啥意思？）。</p><blockquote><p>普通局部变量存储于进程栈空间，使用完毕会立即释放。</p></blockquote><p>静态局部变量使用static修饰符定义，即使在声明时未赋初值，编译器也会把它初始化为0。且静态局部变量存储于进程的全局数据区，即使函数返回，它的值也会保持不变。</p><p>小程序试一试（大一上期末考过类似的）</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">......自己臆想吧<br></code></pre></td></tr></table></figure><p>运行结果如下：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c">n=<span class="hljs-number">10</span><br>n++=<span class="hljs-number">11</span><br>--------------------<br><span class="hljs-keyword">static</span> n=<span class="hljs-number">10</span><br>n++=<span class="hljs-number">11</span><br>--------------------<br>n=<span class="hljs-number">10</span><br>n++=<span class="hljs-number">11</span><br>--------------------<br><span class="hljs-keyword">static</span> n=<span class="hljs-number">11</span><br>n++=<span class="hljs-number">12</span><br></code></pre></td></tr></table></figure><p>由此可见，静态局部变量的效果跟全局变量有得一拼，而且位于函数体内部，就有利于程序的模块化了。</p><h5 id="2-全局变量"><a href="#2-全局变量" class="headerlink" title="2.全局变量"></a>2.全局变量</h5><p>全局变量定义在函数体外部，在全局数据区分配存储空间，且编译器会自动对其初始化。</p><p>普通全局变量对整个工程可见，其他文件可以使用<strong>extern</strong>外部声明后直接使用。也就是说其他文件不能再定义一个与其相同名字的变量了（否则编译器会认为它们是同一个变量）。</p><p>静态全局变量仅对当前文件可见，其他文件不可访问，其他文件可以定义与其同名的变量，两者互不影响。</p><blockquote><p>在定义不需要与其他文件共享的全局变量时，加上static关键字能够有效地降低程序模块之间的耦合，避免不同文件同名变量的冲突，且不会误使用。</p></blockquote><h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>函数的使用方式与全局变量类似，在函数的返回类型前加上static，就是静态函数。其特性如下： </p><ul><li>静态函数只能在声明它的文件中可见，其他文件不能引用该函数</li><li>不同的文件可以使用相同名字的静态函数，互不影响</li></ul><blockquote><p><em><strong>非</strong></em>静态函数可以在另一个文件中直接引用，甚至不必使用extern声明</p></blockquote><p>非静态函数可以在另一个文件中直接引用，甚至不必使用extern声明： </p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* file1.c */</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;hello from fun.\n&quot;</span>);<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;<br>    fun();<br>    fun1();<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">/* file2.c */</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fun1</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;hello from static fun1.\n&quot;</span>);<br>&#125;<br><br></code></pre></td></tr></table></figure><p>使用 <code>gcc file1.c file2.c</code>编译时，错误报告如下：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c">/tmp/cc2VMzGR.o：在函数‘main’中： <br>static_fun.c:(.text+<span class="hljs-number">0x20</span>)：对‘fun1’未定义的引用<br>collect2: error: ld returned <span class="hljs-number">1</span> <span class="hljs-built_in">exit</span> status<br></code></pre></td></tr></table></figure><p>修改文件，不使用static修饰符，可在另一文件中引用该函数：</p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* file1.c */</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fun</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;hello from fun.\n&quot;</span>);<br>&#125;<br><br><span class="hljs-comment">/* file2.c */</span><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>&#123;<br>    fun();<br><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br></code></pre></td></tr></table></figure><p>同样使用 <code>gcc file1.c file2.c</code>编译，编译通过，运行结果如下： </p><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c">-&gt; % ./a.out <br>hello from fun.<br></code></pre></td></tr></table></figure><h2 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h2><p>写下来感觉static还是很有用的（虽然我没用过），能够将代码模块化，达到所谓的松耦合。</p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2021/03/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
+    <url>/2021/03/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</url>
+    
+    <content type="html"><![CDATA[<h1 id="我的第一篇博客"><a href="#我的第一篇博客" class="headerlink" title="我的第一篇博客"></a>我的第一篇博客</h1><p><em>斜体文本</em><br><em>斜体文本</em><br><strong>粗体文本</strong><br><strong>粗体文本</strong><br><em><strong>粗斜体文本</strong></em><br><em><strong>粗斜体文本</strong></em><br><del>BAIDU.COM</del></p><ol><li>第一项： </li></ol><ul><li>第一项嵌套的第一个元素</li><li>第一项嵌套的第二个元素</li></ul><ul><li>第三项</li></ul><blockquote><p>最外层</p><blockquote><p>第一层嵌套</p><blockquote><p>第二层嵌套</p></blockquote></blockquote></blockquote>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="/2021/03/02/hello-world/"/>
+    <url>/2021/03/02/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>
