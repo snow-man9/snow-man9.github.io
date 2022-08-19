@@ -4,6 +4,32 @@
   
   
   <entry>
+    <title>java中的多态</title>
+    <link href="/2022/08/19/java%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81/"/>
+    <url>/2022/08/19/java%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81/</url>
+    
+    <content type="html"><![CDATA[<p>同一操作作用于不同的对象，可以有不同的解释，产生不同的结果。</p><p>java中的多态是一种运行期的状态。满足三个条件：</p><ul><li>有类继承或者接口实现</li><li>子类要重写父类的方法</li><li>父类的引用指向子类的对象</li></ul><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Parent</span></span>&#123;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">call</span><span class="hljs-params">()</span></span>&#123;<br>        sout(<span class="hljs-string">&quot;im Parent&quot;</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Son</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Parent</span></span>&#123;<span class="hljs-comment">// 1.有类继承或者接口实现</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">call</span><span class="hljs-params">()</span></span>&#123;<span class="hljs-comment">// 2.子类要重写父类的方法</span><br>        sout(<span class="hljs-string">&quot;im Son&quot;</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Daughter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Parent</span></span>&#123;<span class="hljs-comment">// 1.有类继承或者接口实现</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">call</span><span class="hljs-params">()</span></span>&#123;<span class="hljs-comment">// 2.子类要重写父类的方法</span><br>        sout(<span class="hljs-string">&quot;im Daughter&quot;</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>&#123;<br>    <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>        Parent p = <span class="hljs-keyword">new</span> Son(); <span class="hljs-comment">//3.父类的引用指向子类的对象</span><br>        Parent p1 = <span class="hljs-keyword">new</span> Daughter(); <span class="hljs-comment">//3.父类的引用指向子类的对象</span><br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure><p>这样，就实现了多态，同样是Parent类的实例，p.call 调用的是Son类的实现、p1.call调用的是Daughter的实现。</p><p>有人说，你自己定义的时候不就已经知道p是son，p1是Daughter了么。但是，有些时候你用到的对象并不都是自己声明的。</p><p>比如Spring 中的IOC出来的对象，你在使用的时候就不知道他是谁，或者说你可以不用关心他是谁。根据具体情况而定。</p><blockquote><p>IOC，是Ioc—Inversion of Control 的缩写，中文翻译成“控制反转”，它是一种设计思想，意味着将你设计好的对象交给容器控制，而不是传统的在你的对象内部直接控制。</p><p>换句话说当我们使用Spring框架的时候，对象是Spring容器创建出来并由容器进行管理，我们只需要使用就行了。</p></blockquote>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title></title>
+    <link href="/2021/09/01/OP-TEE%E4%B8%ADTA%E4%B8%8ECA%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3-------%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E7%AF%87/"/>
+    <url>/2021/09/01/OP-TEE%E4%B8%ADTA%E4%B8%8ECA%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3-------%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E7%AF%87/</url>
+    
+    <content type="html"><![CDATA[<h1 id="OP-TEE中TA与CA执行流程详解——-软件架构篇"><a href="#OP-TEE中TA与CA执行流程详解——-软件架构篇" class="headerlink" title="OP-TEE中TA与CA执行流程详解——-软件架构篇"></a>OP-TEE中TA与CA执行流程详解——-软件架构篇</h1><p>要使用OP-TEE来实现特定的安全功能就需要开发者根据自己的实际需求开发特定的CA和TA程序，并将TA集成到OP-TEE中。CA端负责实现在RTOS端userspace层面的对外接口，而TA端的代码则是在OP-TEE OS的userspace层面负责实现具体的安全功能，例如使用何种算法组合来对数据进行安全处理，对处理后的数据的安全保存，解密加密数据等等功能。接下来的章节将详细介绍CA到TA之间的所有流程以及相关结构体设置，接口调用等等，关于如何在OP-TEE中添加自有的TA和CA程序请参考文档《2. OP-TEE中添加自己的TA和CA》。关于OP-TEE的中断处理的流程请查阅《OP-TEE中的中断处理》相关文章，接下来的章节将介绍不考虑中断的情况下，一个完整的TA和CA之间进行调用的完整过程分析。下图为系统中CA与TA之间执行的软件框图。<br><img src="https://img-blog.csdn.net/20170605181857665?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2h1YWlmZW5neXVu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="img"></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
     <title></title>
     <link href="/2021/08/27/3%20Modern%20Trusted%20Computing%20Hardware/"/>
     <url>/2021/08/27/3%20Modern%20Trusted%20Computing%20Hardware/</url>
