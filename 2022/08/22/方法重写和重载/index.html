@@ -20,7 +20,7 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-  <title>多继承问题 - hc‘s blog</title>
+  <title>方法重写和重载 - hc‘s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -165,7 +165,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="多继承问题">
+            <span class="h2" id="subtitle" title="方法重写和重载">
               
             </span>
 
@@ -175,8 +175,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-08-21 17:04" pubdate>
-        August 21, 2022 pm
+      <time datetime="2022-08-22 15:26" pubdate>
+        August 22, 2022 pm
       </time>
     </span>
   
@@ -187,7 +187,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      779 字
+      683 字
     </span>
   
 
@@ -227,27 +227,25 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">多继承问题</h1>
+            <h1 style="display: none">方法重写和重载</h1>
             
             <div class="markdown-body">
-              <p>Java中支持一个类同时实现多个接口，但是不支持同时继承多个类。但是这个问题在Java 8之后也不绝对了。</p>
-<p>一个类，只有一个父类的情况，我们叫做单继承。而一个类，同时有多个父类的情况，叫做多继承。</p>
-<p>在Java中，一个类，只能通过extends关键字继承一个类，不允许多继承。但是，多继承在其他的面向对象语言中是有可能支持的。</p>
-<p>像C++就是支持多继承的，主要是因为编程的过程是对现实世界的一种抽象，而现实世界中，确实存在着需要多继承的情况。比如维基百科中关于多继承举了一个例子：</p>
-<p>例如，可以创造一个“哺乳类动物”类别，拥有进食、繁殖等的功能；然后定义一个子类型“猫”，它可以从父类继承上述功能。</p>
-<p>但是，”猫”还可以作为”宠物”的子类，拥有一些宠物独有的能力。</p>
-<p>所以，有些面向对象语言是支持多重继承的。</p>
-<p>但是，多年以来，多重继承一直都是一个敏感的话题，反对者指它增加了程序的复杂性与含糊性。</p>
-<h3 id="菱形继承问题"><a href="#菱形继承问题" class="headerlink" title="菱形继承问题"></a>菱形继承问题</h3><p>假设我们有类B和类C，它们都继承了相同的类A。另外我们还有类D，类D通过多重继承机制继承了类B和类C。</p>
-<p><img src="https://www.hollischuang.com/wp-content/uploads/2021/02/16145019571199.jpg" srcset="/img/loading.gif" alt="img"></p>
-<p>这时候，因为D同时继承了B和C，并且B和C又同时继承了A，那么，D中就会因为多重继承，继承到两份来自A中的属性和方法。</p>
-<p>这时候，在使用D的时候，如果想要调用一个定义在A中的方法时，就会出现歧义。</p>
-<p>因为这样的继承关系的形状类似于菱形，因此这个问题被形象地称为菱形继承问题。</p>
-<p>而C++为了解决菱形继承问题，又引入了<strong>虚继承</strong>。</p>
-<p>因为支持多继承，引入了菱形继承问题，又因为要解决菱形继承问题，引入了虚继承。而经过分析，人们发现我们其实真正想要使用多继承的情况并不多。</p>
-<p>所以，在 Java 中，不允许“实现多继承”，即一个类不允许继承多个父类。但是 Java 允许“声明多继承”，即一个类可以实现多个接口，一个接口也可以继承多个父接口。由于接口只允许有方法声明而不允许有方法实现（Java 8以前），这就避免了 C++ 中多继承的歧义问题。</p>
-<p>但是，Java不支持多继承，在Java 8中支持了默认函数（default method ）之后就不那么绝对了。</p>
-<p>虽然我们还是没办法使用extends同时继承多个类，但是因为有了默认函数，我们有可能通过implements从多个接口中继承到多个默认函数，那么，又如何解决这种情况带来的菱形继承问题呢？</p>
+              <p>重载：指的是在同一个类中，多个函数或者方法有同样的名称，但是参数列表不相同的情形，这样的同名不同参数的函数或者方法之间，互相称之为重载函数或者方法。</p>
+<p>重写：指的是在Java的子类与父类中有两个名称、参数列表都相同的方法的情况。由于他们具有相同的方法签名，所以子类中的新方法将覆盖父类中原有的方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//重载</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dog</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">bark</span><span class="hljs-params">()</span></span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;woof &quot;</span>);<br>    &#125;<br><br>    <span class="hljs-comment">//overloading method</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">bark</span><span class="hljs-params">(<span class="hljs-keyword">int</span> num)</span></span>&#123;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;num; i++)<br>            System.out.println(<span class="hljs-string">&quot;woof &quot;</span>);<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>在编译期，编译期可以根据方法签名（方法名和参数情况）情况确定具体哪个bark方法被调用</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//重载</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dog</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">bark</span><span class="hljs-params">()</span></span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;woof &quot;</span>);<br>    &#125;<br>&#125;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Hound</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Dog</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sniff</span><span class="hljs-params">()</span></span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;sniff &quot;</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">bark</span><span class="hljs-params">()</span></span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;bowl&quot;</span>);<br>    &#125;<br>&#125;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">OverridingTest</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String [] args)</span></span>&#123;<br>        Dog dog = <span class="hljs-keyword">new</span> Hound();<br>        dog.bark();<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+<p>输出：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">bowl<br></code></pre></td></tr></table></figure>
+
+<p>上面的例子中，我们分别在父类、子类中都定义了bark方法，并且他们都是无参方法，所以我们就说这种情况就是方法重写。即子类Hound重写了父类Gog中的bark方法。</p>
+<p>在测试的main方法中，<code>dog</code>对象被定义为<code>Dog</code>类型。</p>
+<p>在编译期，编译器会检查Dog类中是否有可访问的<code>bark()</code>方法，只要其中包含<code>bark（）</code>方法，那么就可以编译通过。</p>
+<p>在运行期，<code>Hound</code>对象被<code>new</code>出来，并赋值给<code>dog</code>变量，这时，JVM是明确的知道<code>dog</code>变量指向的其实是<code>Hound</code>对象的引用。所以，当<code>dog</code>调用<code>bark()</code>方法的时候，就会调用<code>Hound</code>类中定义的<code>bark（）</code>方法。这就是所谓的动态多态性。</p>
+<p>方法重写需满足以下条件</p>
+<p>1、参数列表必须完全与被重写方法的相同； 2、返回类型必须完全与被重写方法的返回类型相同； 3、访问级别的限制性一定不能比被重写方法的强； 4、访问级别的限制性可以比被重写方法的弱； 5、重写方法一定不能抛出新的检查异常或比被重写的方法声明的检查异常更广泛的检查异常 6、重写的方法能够抛出更少或更有限的异常（也就是说，被重写的方法声明了异常，但重写的方法可以什么也不声明） 7、不能重写被标示为final的方法； 8、如果不能继承一个方法，则不能重写这个方法。</p>
 
             </div>
             <hr>
@@ -268,9 +266,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/22/%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99%E5%92%8C%E9%87%8D%E8%BD%BD/">
+                      <a href="/2022/08/22/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">方法重写和重载</span>
+                        <span class="hidden-mobile">构造函数</span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -278,8 +276,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/19/java%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81/">
-                        <span class="hidden-mobile">java中的多态</span>
+                      <a href="/2022/08/21/%E5%A4%9A%E7%BB%A7%E6%89%BF%E9%97%AE%E9%A2%98/">
+                        <span class="hidden-mobile">多继承问题</span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
