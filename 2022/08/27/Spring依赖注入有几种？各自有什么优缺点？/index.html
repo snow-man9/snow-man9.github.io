@@ -20,7 +20,7 @@
   <meta name="author" content="John Doe">
   <meta name="keywords" content="">
   
-  <title>为什么不能用浮点型表示金额 - hc‘s blog</title>
+  <title>hc‘s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -165,7 +165,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="为什么不能用浮点型表示金额">
+            <span class="h2" id="subtitle" title="">
               
             </span>
 
@@ -175,8 +175,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2022-08-22 15:26" pubdate>
-        August 22, 2022 pm
+      <time datetime="2022-08-27 20:51" pubdate>
+        August 27, 2022 pm
       </time>
     </span>
   
@@ -187,7 +187,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      72 字
+      642 字
     </span>
   
 
@@ -197,7 +197,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      8
        分钟
     </span>
   
@@ -227,11 +227,50 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">为什么不能用浮点型表示金额</h1>
+            <h1 style="display: none"></h1>
             
             <div class="markdown-body">
-              <p>由于计算机中保存的小数其实是十进制的小数的近似值，并不是准确值，所以，千万不要在代码中使用浮点数来表示金额等重要的指标。</p>
-<p>建议使用BigDecimal或者Long（单位为分）来表示金额。</p>
+              <hr>
+<h2 id="title：Spring依赖注入有几种？各自有什么优缺点？"><a href="#title：Spring依赖注入有几种？各自有什么优缺点？" class="headerlink" title="title：Spring依赖注入有几种？各自有什么优缺点？"></a>title：Spring依赖注入有几种？各自有什么优缺点？</h2><p>IoC和DI是Spring中最重要的两个概念，其中IoC为控制反转的思想，而DI依赖注入是IoC的具体实现。</p>
+<hr>
+<h4 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h4><p>在Spring中实现依赖注入的常见方式有以下3种：</p>
+<ol>
+<li><strong>属性注入（Field Injection）；</strong></li>
+<li><strong>Setter 注入（Setter Injection）；</strong></li>
+<li><strong>构造方法注入（Constructor Injection）。</strong></li>
+</ol>
+<h4 id="属性注入"><a href="#属性注入" class="headerlink" title="属性注入"></a>属性注入</h4><p>属性注入是日常开发中使用最多的一种注入方式：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserController</span> </span>&#123;<br>    <span class="hljs-comment">// 属性对象</span><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-keyword">private</span> UserService userService;<br><br>    <span class="hljs-meta">@RequestMapping(&quot;/add&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> UserInfo <span class="hljs-title">add</span><span class="hljs-params">(String username, String password)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> userService.add(username, password);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h5 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h5><p><strong>属性注入最大的优点就是实现简单、使用简单</strong>，只需要给变量上添加一个注解（@Autowired），就可以在不 new 对象的情况下，直接获得注入的对象了（这就是 DI 的功能和魅力所在），所以它的优点就是使用简单。</p>
+<h5 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h5><p>属性注入虽然使用简单，但是也存在很多问题，甚至编译器 Idea 都会提醒你“不建议使用此注入方式”，Idea 的提示信息如下：</p>
+<p><img src="C:\Users\HP\AppData\Roaming\Typora\typora-user-images\image-20220827130311145.png" srcset="/img/loading.gif" alt="image-20220827130311145"></p>
+<p>属性注入的缺点主要包含以下 3 个：</p>
+<ol>
+<li>功能性问题：无法注入一个不可变的对象（final 修饰的对象）；</li>
+<li>通用性问题：只能适应于 IoC 容器；</li>
+<li>设计原则问题：更容易违背单一设计原则。</li>
+</ol>
+<h4 id="Setter注入"><a href="#Setter注入" class="headerlink" title="Setter注入"></a>Setter注入</h4><p>代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserController</span> </span>&#123;<br>    <span class="hljs-comment">// Setter 注入</span><br>    <span class="hljs-keyword">private</span> UserService userService;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setUserService</span><span class="hljs-params">(UserService userService)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.userService = userService;<br>    &#125;<br><br>    <span class="hljs-meta">@RequestMapping(&quot;/add&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> UserInfo <span class="hljs-title">add</span><span class="hljs-params">(String username, String password)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> userService.add(username, password);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h5 id="优点-1"><a href="#优点-1" class="headerlink" title="优点"></a>优点</h5><p>完全符合单一职责的设计原则，因为每一个Setter只针对一个对象。</p>
+<h5 id="缺点-1"><a href="#缺点-1" class="headerlink" title="缺点"></a>缺点</h5><ol>
+<li>不能注入不可变对象（final 修饰的对象）；</li>
+<li>注入的对象可被修改。</li>
+</ol>
+<h4 id="构造方法注入"><a href="#构造方法注入" class="headerlink" title="构造方法注入"></a>构造方法注入</h4><p><strong>构造方法注入是 Spring 官方从 4.x 之后推荐的注入方式</strong>，它的实现代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserController</span> </span>&#123;<br>    <span class="hljs-comment">// 构造方法注入</span><br>    <span class="hljs-keyword">private</span> UserService userService;<br><br>    <span class="hljs-meta">@Autowired</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">UserController</span><span class="hljs-params">(UserService userService)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.userService = userService;<br>    &#125;<br><br>    <span class="hljs-meta">@RequestMapping(&quot;/add&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> UserInfo <span class="hljs-title">add</span><span class="hljs-params">(String username, String password)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> userService.add(username, password);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>当然，<strong>如果当前的类中只有一个构造方法，那么 @Autowired 也可以省略</strong>，所以以上代码还可以这样写：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@RestController</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserController</span> </span>&#123;<br>    <span class="hljs-comment">// 构造方法注入</span><br>    <span class="hljs-keyword">private</span> UserService userService;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">UserController</span><span class="hljs-params">(UserService userService)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.userService = userService;<br>    &#125;<br><br>    <span class="hljs-meta">@RequestMapping(&quot;/add&quot;)</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> UserInfo <span class="hljs-title">add</span><span class="hljs-params">(String username, String password)</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> userService.add(username, password);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<h5 id="优点-2"><a href="#优点-2" class="headerlink" title="优点"></a>优点</h5><ol>
+<li>可注入不可变对象；</li>
+<li>注入对象不会被修改；</li>
+<li>注入对象会被完全初始化；</li>
+<li>通用性更好。</li>
+</ol>
 
             </div>
             <hr>
@@ -252,9 +291,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2022/08/27/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8%EF%BC%881%EF%BC%89%EF%BC%9A%E5%8F%AF%E8%A7%81%E6%80%A7%E3%80%81%E5%8E%9F%E5%AD%90%E6%80%A7%E5%92%8C%E6%9C%89/">
+                      <a href="/2022/08/27/%E8%BE%93%E5%85%A5URL%E4%B9%8B%E5%90%8E%E4%BC%9A%E6%89%A7%E8%A1%8C%E4%BB%80%E4%B9%88/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">并发编程入门（1）：可见性、原子性和有</span>
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">Previous</span>
                       </a>
                     
@@ -262,8 +301,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2022/08/22/%E7%B1%BB%E5%8F%98%E9%87%8F%E3%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E5%92%8C%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/">
-                        <span class="hidden-mobile">类变量，成员变量和局部变量</span>
+                      <a href="/2022/08/27/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E7%BC%93%E5%AD%98%E7%9A%84%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%9F/">
+                        <span class="hidden-mobile"></span>
                         <span class="visible-mobile">Next</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
