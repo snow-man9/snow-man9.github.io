@@ -1,5 +1,6 @@
 ---
-layout: tag
-index: true
-title: 所有标签
+​---
+layout: category
+title: 所有分类
+​---
 ---
