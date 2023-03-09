@@ -30,7 +30,7 @@
 
 
   <title>
-多继承问题 |
+多继承问题 - Java |
 Yume Shoka = hc‘s blog</title>
 <meta name="generator" content="Hexo 5.4.0"></head>
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -100,12 +100,12 @@ Yume Shoka = hc‘s blog</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipet8c1a2j20zk0m8kct.jpg"></li>
-          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giph4wqtg4j20zk0m8x6p.jpg"></li>
-          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicliierfjj20zk0m8npd.jpg"></li>
-          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipesx5fdwj20zk0m81kx.jpg"></li>
-          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giciusoyjnj219g0u0x56.jpg"></li>
-          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclfb3vzhj20zk0m8wny.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicm0n457cj20zk0m8e81.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicljitigmj20zk0m87fp.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipey84bjtj20zk0m8hdt.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipetfk5zwj20zk0m8e81.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclxfdlttj20zk0m8npd.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipewkhf1zj20zk0m81kx.jpg"></li>
         </ul>
       </div>
     </header>
@@ -130,7 +130,9 @@ Yume Shoka = hc‘s blog</title>
     
 <div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
 <i class="ic i-home"></i>
-<span><a href="/">Home</a></span>
+<span><a href="/">Home</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Java/" itemprop="item" rel="index" title="In Java"><span itemprop="name">Java</span></a>
+<meta itemprop="position" content="1" /></span>
 </div>
 
     <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
@@ -138,7 +140,7 @@ Yume Shoka = hc‘s blog</title>
 
   <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="image" content="/images/avatar.jpg">
-    <meta itemprop="name" content="John Doe">
+    <meta itemprop="name" content="deku酱">
     <meta itemprop="description" content=", ">
   </span>
 
@@ -158,7 +160,7 @@ Yume Shoka = hc‘s blog</title>
 <p>所以，有些面向对象语言是支持多重继承的。</p>
 <p>但是，多年以来，多重继承一直都是一个敏感的话题，反对者指它增加了程序的复杂性与含糊性。</p>
 <h3 id="菱形继承问题"><a href="#菱形继承问题" class="headerlink" title="菱形继承问题"></a>菱形继承问题</h3><p>假设我们有类B和类C，它们都继承了相同的类A。另外我们还有类D，类D通过多重继承机制继承了类B和类C。</p>
-<p><img src="https://www.hollischuang.com/wp-content/uploads/2021/02/16145019571199.jpg" alt="img"></p>
+<p><img data-src="https://www.hollischuang.com/wp-content/uploads/2021/02/16145019571199.jpg" alt="img"></p>
 <p>这时候，因为D同时继承了B和C，并且B和C又同时继承了A，那么，D中就会因为多重继承，继承到两份来自A中的属性和方法。</p>
 <p>这时候，在使用D的时候，如果想要调用一个定义在A中的方法时，就会出现歧义。</p>
 <p>因为这样的继承关系的形状类似于菱形，因此这个问题被形象地称为菱形继承问题。</p>
@@ -178,7 +180,7 @@ Yume Shoka = hc‘s blog</title>
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">Edited on</span>
-    <time title="Modified: 2022-08-21 17:05:32" itemprop="dateModified" datetime="2022-08-21T17:05:32+08:00">2022-08-21</time>
+    <time title="Modified: 2023-03-09 22:02:45" itemprop="dateModified" datetime="2023-03-09T22:02:45+08:00">2023-03-09</time>
   </span>
 </div>
 
@@ -189,17 +191,17 @@ Yume Shoka = hc‘s blog</title>
   <div id="qr">
       
       <div>
-        <img data-src="/images/wechatpay.png" alt="John Doe WeChat Pay">
+        <img data-src="/images/wechatpay.png" alt="deku酱 WeChat Pay">
         <p>WeChat Pay</p>
       </div>
       
       <div>
-        <img data-src="/images/alipay.png" alt="John Doe Alipay">
+        <img data-src="/images/alipay.png" alt="deku酱 Alipay">
         <p>Alipay</p>
       </div>
       
       <div>
-        <img data-src="/images/paypal.png" alt="John Doe PayPal">
+        <img data-src="/images/paypal.png" alt="deku酱 PayPal">
         <p>PayPal</p>
       </div>
   </div>
@@ -210,7 +212,7 @@ Yume Shoka = hc‘s blog</title>
 <div id="copyright">
 <ul>
   <li class="author">
-    <strong>Post author:  </strong>John Doe <i class="ic i-at"><em>@</em></i>hc‘s blog
+    <strong>Post author:  </strong>deku酱 <i class="ic i-at"><em>@</em></i>hc‘s blog
   </li>
   <li class="link">
     <strong>Post link: </strong>
@@ -233,9 +235,9 @@ Yume Shoka = hc‘s blog</title>
     <div class="item left">
       
 
-  <a href="/2022/08/19/java%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipet8c1a2j20zk0m8kct.jpg" title="java中的多态">
+  <a href="/2022/08/19/java%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclg5ms2rj20zk0m8u0x.jpg" title="java中的多态">
   <span class="type">Previous Post</span>
-  <span class="category"><i class="ic i-flag"></i> </span>
+  <span class="category"><i class="ic i-flag"></i> Java</span>
   <h3>java中的多态</h3>
   </a>
 
@@ -243,9 +245,9 @@ Yume Shoka = hc‘s blog</title>
     <div class="item right">
       
 
-  <a href="/2022/08/22/%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99%E5%92%8C%E9%87%8D%E8%BD%BD/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipetv6p75j20zk0m8x6p.jpg" title="方法重写和重载">
+  <a href="/2022/08/22/%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99%E5%92%8C%E9%87%8D%E8%BD%BD/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclxfdlttj20zk0m8npd.jpg" title="方法重写和重载">
   <span class="type">Next Post</span>
-  <span class="category"><i class="ic i-flag"></i> </span>
+  <span class="category"><i class="ic i-flag"></i> Java</span>
   <h3>方法重写和重载</h3>
   </a>
 
@@ -268,25 +270,35 @@ Yume Shoka = hc‘s blog</title>
           <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%8F%B1%E5%BD%A2%E7%BB%A7%E6%89%BF%E9%97%AE%E9%A2%98"><span class="toc-number">1.</span> <span class="toc-text">菱形继承问题</span></a></li></ol>
       </div>
       <div class="related panel pjax" data-title="Related">
+        <ul>
+          <li><a href="/2022/08/19/java%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81/" rel="bookmark" title="java中的多态">java中的多态</a></li><li class="active"><a href="/2022/08/21/%E5%A4%9A%E7%BB%A7%E6%89%BF%E9%97%AE%E9%A2%98/" rel="bookmark" title="多继承问题">多继承问题</a></li><li><a href="/2022/08/22/%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99%E5%92%8C%E9%87%8D%E8%BD%BD/" rel="bookmark" title="方法重写和重载">方法重写和重载</a></li><li><a href="/2022/08/22/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" rel="bookmark" title="构造函数">构造函数</a></li><li><a href="/2022/08/22/%E7%B1%BB%E5%8F%98%E9%87%8F%E3%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E5%92%8C%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/" rel="bookmark" title="类变量，成员变量和局部变量">类变量，成员变量和局部变量</a></li><li><a href="/2022/08/22/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E5%9E%8B%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/" rel="bookmark" title="为什么不能用浮点型表示金额">为什么不能用浮点型表示金额</a></li><li><a href="/2022/08/27/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8%EF%BC%881%EF%BC%89%EF%BC%9A%E5%8F%AF%E8%A7%81%E6%80%A7%E3%80%81%E5%8E%9F%E5%AD%90%E6%80%A7%E5%92%8C%E6%9C%89%E5%BA%8F%E6%80%A7/" rel="bookmark" title="并发编程入门（1）：可见性、原子性和有序性">并发编程入门（1）：可见性、原子性和有序性</a></li><li><a href="/2022/08/28/Spring%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E6%9C%89%E5%87%A0%E7%A7%8D%EF%BC%9F%E5%90%84%E8%87%AA%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E7%BC%BA%E7%82%B9%EF%BC%9F/" rel="bookmark" title="Spring依赖注入有几种？各自有什么优缺点？">Spring依赖注入有几种？各自有什么优缺点？</a></li>
+        </ul>
       </div>
       <div class="overview panel" data-title="Overview">
         <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <img class="image" itemprop="image" alt="John Doe"
+  <img class="image" itemprop="image" alt="deku酱"
       data-src="/images/avatar.jpg">
-  <p class="name" itemprop="name">John Doe</p>
+  <p class="name" itemprop="name">deku酱</p>
   <div class="description" itemprop="description"></div>
 </div>
 
 <nav class="state">
     <div class="item posts">
       <a href="/archives/">
-        <span class="count">23</span>
+        <span class="count">24</span>
         <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">9</span>
+        <span class="name">categories</span>
       </a>
     </div>
 </nav>
 
 <div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Nub3ctbWFuOQ==" title="https:&#x2F;&#x2F;github.com&#x2F;snow-man9"><i class="ic i-github"></i></span>
 </div>
 
 <ul class="menu">
@@ -294,6 +306,37 @@ Yume Shoka = hc‘s blog</title>
     
   <li class="item">
     <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>About</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>Posts</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>Archives</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>Friends</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/links/" rel="section"><i class="ic i-magic"></i>Links</a>
   </li>
 
 
@@ -332,51 +375,7 @@ Yume Shoka = hc‘s blog</title>
   <li class="item">
     
 <div class="breadcrumb">
-</div>
-
-    <span><a href="/2021/03/11/c%E7%9A%84const/" title="const">const</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2022/08/19/java%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81/" title="java中的多态">java中的多态</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2022/08/22/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" title="构造函数">构造函数</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2022/08/22/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E5%9E%8B%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/" title="为什么不能用浮点型表示金额">为什么不能用浮点型表示金额</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2022/08/22/%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99%E5%92%8C%E9%87%8D%E8%BD%BD/" title="方法重写和重载">方法重写和重载</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
+<a href="/categories/Java/" title="In Java">Java</a>
 </div>
 
     <span><a href="/2022/08/27/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8%EF%BC%881%EF%BC%89%EF%BC%9A%E5%8F%AF%E8%A7%81%E6%80%A7%E3%80%81%E5%8E%9F%E5%AD%90%E6%80%A7%E5%92%8C%E6%9C%89%E5%BA%8F%E6%80%A7/" title="并发编程入门（1）：可见性、原子性和有序性">并发编程入门（1）：可见性、原子性和有序性</a></span>
@@ -386,15 +385,37 @@ Yume Shoka = hc‘s blog</title>
   <li class="item">
     
 <div class="breadcrumb">
+<a href="/categories/ARM-TrustZone/" title="In ARM TrustZone">ARM TrustZone</a>
 </div>
 
-    <span><a href="/2022/08/28/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E7%BC%93%E5%AD%98%E7%9A%84%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%9F/" title="如何保证数据库和缓存双写一致性？">如何保证数据库和缓存双写一致性？</a></span>
+    <span><a href="/2021/09/01/OP-TEE%E4%B8%ADTA%E4%B8%8ECA%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3-------%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E7%AF%87/" title="OP-TEE中TA与CA执行流程详解-------软件架构篇">OP-TEE中TA与CA执行流程详解-------软件架构篇</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
+<a href="/categories/Java/" title="In Java">Java</a>
+</div>
+
+    <span><a href="/2022/08/28/Spring%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E6%9C%89%E5%87%A0%E7%A7%8D%EF%BC%9F%E5%90%84%E8%87%AA%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E7%BC%BA%E7%82%B9%EF%BC%9F/" title="Spring依赖注入有几种？各自有什么优缺点？">Spring依赖注入有几种？各自有什么优缺点？</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/C%E8%AF%AD%E8%A8%80/" title="In C语言">C语言</a>
+</div>
+
+    <span><a href="/2021/03/03/static/" title="C中static的运用">C中static的运用</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/C%E8%AF%AD%E8%A8%80/" title="In C语言">C语言</a>
 </div>
 
     <span><a href="/2021/03/07/c%E7%9A%84%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" title="C的动态内存分配">C的动态内存分配</a></span>
@@ -404,18 +425,52 @@ Yume Shoka = hc‘s blog</title>
   <li class="item">
     
 <div class="breadcrumb">
+<a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" title="In 数据库">数据库</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/%E7%BC%93%E5%AD%98/" title="In 缓存">缓存</a>
 </div>
 
-    <span><a href="/2021/03/02/hello-world/" title="Hello World">Hello World</a></span>
+    <span><a href="/2022/08/28/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E7%BC%93%E5%AD%98%E7%9A%84%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%9F/" title="如何保证数据库和缓存双写一致性？">如何保证数据库和缓存双写一致性？</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
+<a href="/categories/%E7%BD%91%E7%BB%9C/" title="In 网络">网络</a>
 </div>
 
-    <span><a href="/2021/03/07/%E7%BA%B5%E5%90%91%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0/" title="纵向联邦学习">纵向联邦学习</a></span>
+    <span><a href="/2022/08/28/%E8%BE%93%E5%85%A5URL%E4%B9%8B%E5%90%8E%E4%BC%9A%E6%89%A7%E8%A1%8C%E4%BB%80%E4%B9%88/" title="输入URL之后会执行什么">输入URL之后会执行什么</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/C%E8%AF%AD%E8%A8%80/" title="In C语言">C语言</a>
+</div>
+
+    <span><a href="/2021/03/11/c%E7%9A%84const/" title="const">const</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Java/" title="In Java">Java</a>
+</div>
+
+    <span><a href="/2022/08/22/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E5%9E%8B%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/" title="为什么不能用浮点型表示金额">为什么不能用浮点型表示金额</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ARM-TrustZone/" title="In ARM TrustZone">ARM TrustZone</a>
+</div>
+
+    <span><a href="/2021/09/01/OP-TEE%E4%B8%ADCA%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B------%E7%B3%BB%E7%BB%9F%E5%90%84%E5%B1%82%E9%9D%A2%E5%85%B3%E7%B3%BB/" title="OP-TEE中CA接口调用的完整流程------系统各层面关系">OP-TEE中CA接口调用的完整流程------系统各层面关系</a></span>
   </li>
 
   </ul>
@@ -434,7 +489,7 @@ Yume Shoka = hc‘s blog</title>
     <span class="with-love">
       <i class="ic i-sakura rotate"></i>
     </span>
-    <span class="author" itemprop="copyrightHolder">John Doe @ Yume Shoka</span>
+    <span class="author" itemprop="copyrightHolder">deku酱 @ Yume Shoka</span>
   </div>
   <div class="powered-by">
     Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>

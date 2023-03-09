@@ -1,0 +1,32 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "hc‘s blog • All posts by \"感想\" category",
+    "description": "",
+    "home_page_url": "http://example.com",
+    "items": [
+        {
+            "id": "http://example.com/2021/03/05/3.4%E7%9A%84%E6%84%9F%E6%83%B3/",
+            "url": "http://example.com/2021/03/05/3.4%E7%9A%84%E6%84%9F%E6%83%B3/",
+            "title": "怎么说呢，有点沉不下心来",
+            "date_published": "2021-03-04T16:06:53.385Z",
+            "content_html": "<p>又是无聊的一天，上午两节水课（大物老师太菜了，鬼都不想听）。哦，对，上午还看了一下Java，挺难的，看不太懂，毕竟没有咋实践过。继续看吧，看总比不看好。</p>\n<p>然后下午睡到三点多钟，爬起来学了一下博客做了点小功能，雪花呀，代码雨呀，有教程还是挺简单的，现在主要是在搞图标的问题，找也不好找，明天接着看一下吧。</p>\n<p>然后打了两把排位，都赢了（鳄鱼）。上单霸主。</p>\n<p>晚上写了一下博客，主要是工作室的任务还没完成，天天学这学那。所以写了点安全多方计算。算是理解深了点吧。</p>\n<p>over。</p>\n<p>明天体育课，，，操，，浪费老子100权重。</p>\n",
+            "tags": []
+        },
+        {
+            "id": "http://example.com/2021/03/03/3.3%E7%9A%84%E6%84%9F%E6%83%B3/",
+            "url": "http://example.com/2021/03/03/3.3%E7%9A%84%E6%84%9F%E6%83%B3/",
+            "title": "无题",
+            "date_published": "2021-03-03T15:46:09.789Z",
+            "content_html": "<h5 id=\"写这个只是为了回忆一下今天的所作所为，起到一个警醒作用吧！\"><a href=\"#写这个只是为了回忆一下今天的所作所为，起到一个警醒作用吧！\" class=\"headerlink\" title=\"写这个只是为了回忆一下今天的所作所为，起到一个警醒作用吧！\"></a>写这个只是为了回忆一下今天的所作所为，起到一个警醒作用吧！</h5><ul>\n<li>今天就两节课，一节微积分，一节离散。</li>\n</ul>\n<p>微积分还算好好听了，这个老师（高中喜）讲的课还算听得下去，感觉女的数学老师教学水平就那样，或者说不能激发我的兴趣把。还是得好好学，没办法，虽然感觉上了大学只想打游戏，但还是有自制力的。</p>\n<p>离散就真鸡巴水，难怪王静（大一上计算机导论的老师）都可以教。看了两节课java（沉默王二），也没看进去多少。</p>\n<ul>\n<li>晚上打了两三个小时游戏，输（我carry）多赢（队友carry）少。当然有点不尽兴，不过也没有办法。</li>\n<li>明天（星期四）似乎也是两节没啥意思的课（大物和思修）。突然想看python了，感觉挺容易的，java还得多学学，而且C都不怎么会。</li>\n<li>慢慢学吧。</li>\n<li>0：08</li>\n<li>over</li>\n</ul>\n",
+            "tags": []
+        },
+        {
+            "id": "http://example.com/2021/03/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/",
+            "url": "http://example.com/2021/03/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/",
+            "title": "我的第一篇博客",
+            "date_published": "2021-03-03T05:02:28.386Z",
+            "content_html": "<p><em>斜体文本</em><br><em>斜体文本</em><br><strong>粗体文本</strong><br><strong>粗体文本</strong><br><em><strong>粗斜体文本</strong></em><br><em><strong>粗斜体文本</strong></em><br><del>BAIDU.COM</del></p>\n<ol>\n<li>第一项： </li>\n</ol>\n<ul>\n<li>第一项嵌套的第一个元素</li>\n<li>第一项嵌套的第二个元素</li>\n</ul>\n<ul>\n<li>第三项</li>\n</ul>\n<blockquote>\n<p>最外层</p>\n<blockquote>\n<p>第一层嵌套</p>\n<blockquote>\n<p>第二层嵌套</p>\n</blockquote>\n</blockquote>\n</blockquote>\n",
+            "tags": []
+        }
+    ]
+}

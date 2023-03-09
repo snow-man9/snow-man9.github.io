@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://example.com</id>
+    <title>hc‘s blog • Posts by &#34;感想&#34; category</title>
+    <link href="http://example.com" />
+    <updated>2021-03-04T16:06:53.385Z</updated>
+    <entry>
+        <id>http://example.com/2021/03/05/3.4%E7%9A%84%E6%84%9F%E6%83%B3/</id>
+        <title>怎么说呢，有点沉不下心来</title>
+        <link rel="alternate" href="http://example.com/2021/03/05/3.4%E7%9A%84%E6%84%9F%E6%83%B3/"/>
+        <content type="html">&lt;p&gt;又是无聊的一天，上午两节水课（大物老师太菜了，鬼都不想听）。哦，对，上午还看了一下Java，挺难的，看不太懂，毕竟没有咋实践过。继续看吧，看总比不看好。&lt;/p&gt;
+&lt;p&gt;然后下午睡到三点多钟，爬起来学了一下博客做了点小功能，雪花呀，代码雨呀，有教程还是挺简单的，现在主要是在搞图标的问题，找也不好找，明天接着看一下吧。&lt;/p&gt;
+&lt;p&gt;然后打了两把排位，都赢了（鳄鱼）。上单霸主。&lt;/p&gt;
+&lt;p&gt;晚上写了一下博客，主要是工作室的任务还没完成，天天学这学那。所以写了点安全多方计算。算是理解深了点吧。&lt;/p&gt;
+&lt;p&gt;over。&lt;/p&gt;
+&lt;p&gt;明天体育课，，，操，，浪费老子100权重。&lt;/p&gt;
+</content>
+        <updated>2021-03-04T16:06:53.385Z</updated>
+    </entry>
+    <entry>
+        <id>http://example.com/2021/03/03/3.3%E7%9A%84%E6%84%9F%E6%83%B3/</id>
+        <title>无题</title>
+        <link rel="alternate" href="http://example.com/2021/03/03/3.3%E7%9A%84%E6%84%9F%E6%83%B3/"/>
+        <content type="html">&lt;h5 id=&#34;写这个只是为了回忆一下今天的所作所为，起到一个警醒作用吧！&#34;&gt;&lt;a href=&#34;#写这个只是为了回忆一下今天的所作所为，起到一个警醒作用吧！&#34; class=&#34;headerlink&#34; title=&#34;写这个只是为了回忆一下今天的所作所为，起到一个警醒作用吧！&#34;&gt;&lt;/a&gt;写这个只是为了回忆一下今天的所作所为，起到一个警醒作用吧！&lt;/h5&gt;&lt;ul&gt;
+&lt;li&gt;今天就两节课，一节微积分，一节离散。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;微积分还算好好听了，这个老师（高中喜）讲的课还算听得下去，感觉女的数学老师教学水平就那样，或者说不能激发我的兴趣把。还是得好好学，没办法，虽然感觉上了大学只想打游戏，但还是有自制力的。&lt;/p&gt;
+&lt;p&gt;离散就真鸡巴水，难怪王静（大一上计算机导论的老师）都可以教。看了两节课java（沉默王二），也没看进去多少。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;晚上打了两三个小时游戏，输（我carry）多赢（队友carry）少。当然有点不尽兴，不过也没有办法。&lt;/li&gt;
+&lt;li&gt;明天（星期四）似乎也是两节没啥意思的课（大物和思修）。突然想看python了，感觉挺容易的，java还得多学学，而且C都不怎么会。&lt;/li&gt;
+&lt;li&gt;慢慢学吧。&lt;/li&gt;
+&lt;li&gt;0：08&lt;/li&gt;
+&lt;li&gt;over&lt;/li&gt;
+&lt;/ul&gt;
+</content>
+        <updated>2021-03-03T15:46:09.789Z</updated>
+    </entry>
+    <entry>
+        <id>http://example.com/2021/03/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/</id>
+        <title>我的第一篇博客</title>
+        <link rel="alternate" href="http://example.com/2021/03/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/"/>
+        <content type="html">&lt;p&gt;&lt;em&gt;斜体文本&lt;/em&gt;&lt;br&gt;&lt;em&gt;斜体文本&lt;/em&gt;&lt;br&gt;&lt;strong&gt;粗体文本&lt;/strong&gt;&lt;br&gt;&lt;strong&gt;粗体文本&lt;/strong&gt;&lt;br&gt;&lt;em&gt;&lt;strong&gt;粗斜体文本&lt;/strong&gt;&lt;/em&gt;&lt;br&gt;&lt;em&gt;&lt;strong&gt;粗斜体文本&lt;/strong&gt;&lt;/em&gt;&lt;br&gt;&lt;del&gt;BAIDU.COM&lt;/del&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;第一项： &lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;第一项嵌套的第一个元素&lt;/li&gt;
+&lt;li&gt;第一项嵌套的第二个元素&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;第三项&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;最外层&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;第一层嵌套&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;第二层嵌套&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+</content>
+        <updated>2021-03-03T05:02:28.386Z</updated>
+    </entry>
+</feed>

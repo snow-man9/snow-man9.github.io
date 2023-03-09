@@ -1,0 +1,539 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="hc‘s blog" href="http://example.com/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="hc‘s blog" href="http://example.com/atom.xml" />
+<link rel="alternate" type="application/json" title="hc‘s blog" href="http://example.com/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="http://example.com/2021/09/01/OP-TEE%E4%B8%ADCA%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B------%E7%B3%BB%E7%BB%9F%E5%90%84%E5%B1%82%E9%9D%A2%E5%85%B3%E7%B3%BB/">
+
+
+
+  <title>
+OP-TEE中CA接口调用的完整流程------系统各层面关系 - ARM TrustZone |
+Yume Shoka = hc‘s blog</title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">OP-TEE中CA接口调用的完整流程------系统各层面关系
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="Created: 2021-09-01 19:31:10">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">Posted on</span>
+    <time itemprop="dateCreated datePublished" datetime="2021-09-01T19:31:10+08:00">2021-09-01</time>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Yume Shoka</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclgrvbd6j20zk0m8qv5.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclh3brzpj20zk0m8ann.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicis081o9j20zk0m8dmr.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giph4lm9i7j20zk0m84qp.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclhtuo6nj20zk0m8ttm.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclhpw3lwj20zk0m8gvw.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">Home</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/ARM-TrustZone/" itemprop="item" rel="index" title="In ARM TrustZone"><span itemprop="name">ARM TrustZone</span></a>
+<meta itemprop="position" content="1" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2021/09/01/OP-TEE%E4%B8%ADCA%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B------%E7%B3%BB%E7%BB%9F%E5%90%84%E5%B1%82%E9%9D%A2%E5%85%B3%E7%B3%BB/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="deku酱">
+    <meta itemprop="description" content=", ">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="hc‘s blog">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <h1 id="OP-TEE中CA接口调用的完整流程——系统各层面关系"><a href="#OP-TEE中CA接口调用的完整流程——系统各层面关系" class="headerlink" title="OP-TEE中CA接口调用的完整流程——系统各层面关系"></a>OP-TEE中CA接口调用的完整流程——系统各层面关系</h1><p>二级厂商需要实现自有feature，需要添加自己的TA 和CA接口，当CA部分的接口需要提供给app层面调用的时候，一般做法是在framwork中建立特定的service，在service中调用CA接口。同时也会建立对应的client部分，一般做法是在framwork中建立特定的service，在service中调用CA接口，同时也会建立对应的client部分，client部分与service部分通过Binder的方式进行同行来触发CA接口调用的操作。而对于APP层面，开发者会将client部分提供的接口以JNI的方式进行封装暴露给上层APP调用。</p>
+<p>当上层APP调用封装好的JNI接口后，CA接口是如何通知特定的TA执行特定操作的呢？CA与TA之间的数据是如何传递的呢？cortex的状态是如何切换的呢？本文将详细讲解一次CA接口调用后功能实现的完整流程（本文不讨论FIQ和IRQ的情况，只讨论通过调用SMC指令调用到TEE的情况）。</p>
+<h2 id="1-支持TEE的系统各层面关系图"><a href="#1-支持TEE的系统各层面关系图" class="headerlink" title="1.支持TEE的系统各层面关系图"></a>1.支持TEE的系统各层面关系图</h2><p>下图为层面结构图：</p>
+<p><img data-src="https://img-blog.csdn.net/20170511210006850" alt="img"></p>
+<p>　当CA接口处于userspace层面，整个调用过程需要经过kernel space层面， linux driver层面， Monitor态中断处理层面， TEE OS kernel层面， TEE的userspace层面（TA）。</p>
+<h2 id="2-userspace到kernelspace"><a href="#2-userspace到kernelspace" class="headerlink" title="2.userspace到kernelspace"></a>2.userspace到kernelspace</h2><p>在userspace层面调用CA接口后会触发system call操作，系统调用会将Lixnux陷入内核态，此时系统处于kernel space，然后根据传入的参数，找到对应的TEE driver，整个过程大致如下：</p>
+<p><img data-src="https://img-blog.csdn.net/20170511210145320" alt="img"></p>
+<p>关于该部分更加详细的内容，例如：软中断如何在kernel中注册的，系统调用的定义等等可查找系统调用（systemcall）和驱动的相关资料进行了解。</p>
+<h2 id="3-TEE-driver到monitor态"><a href="#3-TEE-driver到monitor态" class="headerlink" title="3.TEE driver到monitor态"></a>3.TEE driver到monitor态</h2><p>在TEE的driver中，最终会调用SMC这条汇编指令来实现与OP-TEE的沟通，当调用SMC汇编指令之后，会触发SMC软中断，改软中断的处理在Cortex的Monitor态中进行，该软中断会根据发送指令是属于安全侧请求哈市非安全侧的请求来控制是将cortex切换到secure world态还是non-secure world态。该切换动作在ATF的SMC中断处理函数中被实现。</p>
+<h2 id="4-TEE-kernel-space到TEE-userspace"><a href="#4-TEE-kernel-space到TEE-userspace" class="headerlink" title="4.TEE kernel space到TEE userspace"></a>4.TEE kernel space到TEE userspace</h2><p>当SMC中断处理函数完成了将cortex的状态切换到secure world态以及相关参数的拷贝动作之后，TEE OS将接管剩下的操作。TEE OS首先将会获取从CA端传递过来的数据，然后解析出数据中写入的TA的UUID，然后查找对应的TA image是否被挂载到了 TEE OS中。</p>
+<p>　　如果没有TEE OS将会与常驻在linux中的tee_supplicant进程通信，从文件系统中获取到TA image文件，并传递給TEE OS，然后加载该TA image。处理完整之后，TEE OS会切换到TEE userspace态，并将CA传递过来的其他参数传给具体的TA process，TA process获取到参数后，首先需要解除出参数中的commond ID值，根据具体的command ID值来做具体的操作。</p>
+<p>当然TEE OS在加载TA image的时候会有电子验签操作来验证TA image的合法性。上述步骤的大致流程图如下：<br><img data-src="https://img-blog.csdn.net/20170511210437602" alt="img"></p>
+<p>由于一次完整的CA调用过程需要做一次调用执行initContext, Opensession, InvokeCommand, close session, FinalizeContext操作，所以上图只是大致流程，关于详细部分将会在后期章节中节后代码逐步讲解。</p>
+<h2 id="5-GP规定的C端接口"><a href="#5-GP规定的C端接口" class="headerlink" title="5.GP规定的C端接口"></a>5.GP规定的C端接口</h2><p>在GP中规定的CA端接口较少，主要的是五个接口，分别如下：</p>
+<p>TEEC_InitializeContext: 初始化TEE context，完成open tee driver，建立与TEE之间的context</p>
+<p>TEEC_OpenSession: 建立CA与TA之间的会话窗口</p>
+<p>TEEC_InvokeCommand: 想TA发送执行请求来执行具体的操作</p>
+<p>TEEC_CloseSession: 关闭CA与TA之间的会话窗口</p>
+<p>TEEC_FinalizeContext:清空建立的contex</p>
+<hr>
+<p>转载自：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NodWFpZmVuZ3l1bi9hcnRpY2xlL2RldGFpbHMvNzE2OTczNzE=">https://blog.csdn.net/shuaifengyun/article/details/71697371</span></p>
+<p>自己差不多抄了一遍，大概流程看了一下，还是有些细节不太懂。很多操作没有见过，也不知道为什么要这样做。</p>
+
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">Edited on</span>
+    <time title="Modified: 2023-03-09 21:58:12" itemprop="dateModified" datetime="2023-03-09T21:58:12+08:00">2023-03-09</time>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> Donate</button>
+  <p>Give me a cup of [coffee]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="deku酱 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="deku酱 Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="deku酱 PayPal">
+        <p>PayPal</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>Post author:  </strong>deku酱 <i class="ic i-at"><em>@</em></i>hc‘s blog
+  </li>
+  <li class="link">
+    <strong>Post link: </strong>
+    <a href="http://example.com/2021/09/01/OP-TEE%E4%B8%ADCA%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B------%E7%B3%BB%E7%BB%9F%E5%90%84%E5%B1%82%E9%9D%A2%E5%85%B3%E7%B3%BB/" title="OP-TEE中CA接口调用的完整流程------系统各层面关系">http://example.com/2021/09/01/OP-TEE中CA接口调用的完整流程------系统各层面关系/</a>
+  </li>
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2021/08/27/3%20Modern%20Trusted%20Computing%20Hardware/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipeudstjqj20zk0m8k3r.jpg" title="3 Modern Trusted Computing Hardware">
+  <span class="type">Previous Post</span>
+  <span class="category"><i class="ic i-flag"></i> ARM TrustZone</span>
+  <h3>3 Modern Trusted Computing Hardware</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+      
+
+  <a href="/2021/09/01/OP-TEE%E4%B8%ADTA%E4%B8%8ECA%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3-------%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E7%AF%87/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipeuv80yoj20zk0m8kjl.jpg" title="OP-TEE中TA与CA执行流程详解-------软件架构篇">
+  <span class="type">Next Post</span>
+  <span class="category"><i class="ic i-flag"></i> ARM TrustZone</span>
+  <h3>OP-TEE中TA与CA执行流程详解-------软件架构篇</h3>
+  </a>
+
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#OP-TEE%E4%B8%ADCA%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B%E2%80%94%E2%80%94%E7%B3%BB%E7%BB%9F%E5%90%84%E5%B1%82%E9%9D%A2%E5%85%B3%E7%B3%BB"><span class="toc-number">1.</span> <span class="toc-text">OP-TEE中CA接口调用的完整流程——系统各层面关系</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%94%AF%E6%8C%81TEE%E7%9A%84%E7%B3%BB%E7%BB%9F%E5%90%84%E5%B1%82%E9%9D%A2%E5%85%B3%E7%B3%BB%E5%9B%BE"><span class="toc-number">1.1.</span> <span class="toc-text">1.支持TEE的系统各层面关系图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-userspace%E5%88%B0kernelspace"><span class="toc-number">1.2.</span> <span class="toc-text">2.userspace到kernelspace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-TEE-driver%E5%88%B0monitor%E6%80%81"><span class="toc-number">1.3.</span> <span class="toc-text">3.TEE driver到monitor态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-TEE-kernel-space%E5%88%B0TEE-userspace"><span class="toc-number">1.4.</span> <span class="toc-text">4.TEE kernel space到TEE userspace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-GP%E8%A7%84%E5%AE%9A%E7%9A%84C%E7%AB%AF%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.5.</span> <span class="toc-text">5.GP规定的C端接口</span></a></li></ol></li></ol>
+      </div>
+      <div class="related panel pjax" data-title="Related">
+        <ul>
+          <li><a href="/2021/08/20/TZ%E5%AD%A6%E4%B9%A0%E7%BB%84%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%932021.8.9-2021.8.20/" rel="bookmark" title="TZ学习组学习总结2021.8.9-2021.8.20">TZ学习组学习总结2021.8.9-2021.8.20</a></li><li><a href="/2021/08/27/3%20Modern%20Trusted%20Computing%20Hardware/" rel="bookmark" title="3 Modern Trusted Computing Hardware">3 Modern Trusted Computing Hardware</a></li><li class="active"><a href="/2021/09/01/OP-TEE%E4%B8%ADCA%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B------%E7%B3%BB%E7%BB%9F%E5%90%84%E5%B1%82%E9%9D%A2%E5%85%B3%E7%B3%BB/" rel="bookmark" title="OP-TEE中CA接口调用的完整流程------系统各层面关系">OP-TEE中CA接口调用的完整流程------系统各层面关系</a></li><li><a href="/2021/09/01/OP-TEE%E4%B8%ADTA%E4%B8%8ECA%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3-------%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E7%AF%87/" rel="bookmark" title="OP-TEE中TA与CA执行流程详解-------软件架构篇">OP-TEE中TA与CA执行流程详解-------软件架构篇</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="deku酱"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">deku酱</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">24</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">9</span>
+        <span class="name">categories</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Nub3ctbWFuOQ==" title="https:&#x2F;&#x2F;github.com&#x2F;snow-man9"><i class="ic i-github"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>About</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>Posts</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>Archives</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>Friends</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/links/" rel="section"><i class="ic i-magic"></i>Links</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+        <a href="/2021/08/27/3%20Modern%20Trusted%20Computing%20Hardware/" rel="prev" title="Previous Post"><i class="ic i-chevron-left"></i></a>
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+        <a href="/2021/09/01/OP-TEE%E4%B8%ADTA%E4%B8%8ECA%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3-------%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E7%AF%87/" rel="next" title="Next Post"><i class="ic i-chevron-right"></i></a>
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>Random Posts</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%84%9F%E6%83%B3/" title="In 感想">感想</a>
+</div>
+
+    <span><a href="/2021/03/03/3.3%E7%9A%84%E6%84%9F%E6%83%B3/" title="无题">无题</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ARM-TrustZone/" title="In ARM TrustZone">ARM TrustZone</a>
+</div>
+
+    <span><a href="/2021/08/27/3%20Modern%20Trusted%20Computing%20Hardware/" title="3 Modern Trusted Computing Hardware">3 Modern Trusted Computing Hardware</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ARM-TrustZone/" title="In ARM TrustZone">ARM TrustZone</a>
+</div>
+
+    <span><a href="/2021/08/20/TZ%E5%AD%A6%E4%B9%A0%E7%BB%84%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%932021.8.9-2021.8.20/" title="TZ学习组学习总结2021.8.9-2021.8.20">TZ学习组学习总结2021.8.9-2021.8.20</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/C%E8%AF%AD%E8%A8%80/" title="In C语言">C语言</a>
+</div>
+
+    <span><a href="/2021/03/03/static/" title="C中static的运用">C中static的运用</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Java/" title="In Java">Java</a>
+</div>
+
+    <span><a href="/2022/08/22/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" title="构造函数">构造函数</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0/" title="In 联邦学习">联邦学习</a>
+</div>
+
+    <span><a href="/2021/03/06/3.6%E4%B8%BA%E4%BA%86%E8%82%9D%E5%91%A8%E6%8A%A5%E7%9A%84%E5%AD%A6%E4%B9%A0/" title="横向联邦学习">横向联邦学习</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Java/" title="In Java">Java</a>
+</div>
+
+    <span><a href="/2022/08/27/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8%EF%BC%881%EF%BC%89%EF%BC%9A%E5%8F%AF%E8%A7%81%E6%80%A7%E3%80%81%E5%8E%9F%E5%AD%90%E6%80%A7%E5%92%8C%E6%9C%89%E5%BA%8F%E6%80%A7/" title="并发编程入门（1）：可见性、原子性和有序性">并发编程入门（1）：可见性、原子性和有序性</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/C%E8%AF%AD%E8%A8%80/" title="In C语言">C语言</a>
+</div>
+
+    <span><a href="/2021/03/07/c%E7%9A%84%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" title="C的动态内存分配">C的动态内存分配</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%89%E5%85%A8/" title="In 安全">安全</a>
+</div>
+
+    <span><a href="/2021/03/04/%E5%AE%89%E5%85%A8%E5%A4%9A%E6%96%B9%E8%AE%A1%E7%AE%97%E7%9A%84%E5%88%9D%E8%AE%A4%E8%AF%86/" title="安全多方计算的初认识">安全多方计算的初认识</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Java/" title="In Java">Java</a>
+</div>
+
+    <span><a href="/2022/08/21/%E5%A4%9A%E7%BB%A7%E6%89%BF%E9%97%AE%E9%A2%98/" title="多继承问题">多继承问题</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>Recent Comments</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2010 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">deku酱 @ Yume Shoka</span>
+  </div>
+  <div class="powered-by">
+    Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2021/09/01/OP-TEE中CA接口调用的完整流程------系统各层面关系/',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>

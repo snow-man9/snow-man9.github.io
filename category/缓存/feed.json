@@ -1,0 +1,16 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "hc‘s blog • All posts by \"缓存\" category",
+    "description": "",
+    "home_page_url": "http://example.com",
+    "items": [
+        {
+            "id": "http://example.com/2022/08/28/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E7%BC%93%E5%AD%98%E7%9A%84%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%9F/",
+            "url": "http://example.com/2022/08/28/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E7%BC%93%E5%AD%98%E7%9A%84%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%9F/",
+            "title": "如何保证数据库和缓存双写一致性？",
+            "date_published": "2022-08-28T06:02:50.658Z",
+            "content_html": "<p> 数据库和缓存的双写数据一致性问题，是一个和开发语言无关的公共问题。尤其在高并发的场景下，这个问题变得更加严重。</p>\n<hr>\n<h4 id=\"常见方案\"><a href=\"#常见方案\" class=\"headerlink\" title=\"常见方案\"></a>常见方案</h4><p>通常情况下，我们使用缓存的目的主要是为了提升查询的性能。</p>\n<p><img data-src=\"https://i.imgtg.com/2023/03/09/Y9WKC.png\" alt=\"image-20220826232725235\"></p>\n<p>但是如果数据库中的某条数据，在放入缓存后又立马被更新了，那该如何更新缓存呢？</p>\n<p>目前有4种方案：</p>\n<ol>\n<li>先写缓存，再写数据库</li>\n<li>先写数据库，再写缓存</li>\n<li>先删缓存，再写数据库</li>\n<li>先写数据库，再删缓存</li>\n</ol>\n<h4 id=\"先写缓存，再写数据库\"><a href=\"#先写缓存，再写数据库\" class=\"headerlink\" title=\"先写缓存，再写数据库\"></a>先写缓存，再写数据库</h4><p>实际上这种方案不可取。</p>\n<p>例如用户在刚写完缓存后，网络出现了异常，导致写数据库失败了。那么缓存这种数据库不存在的”假数据“就没有意义了。</p>\n<h4 id=\"先写数据库，再写缓存\"><a href=\"#先写数据库，再写缓存\" class=\"headerlink\" title=\"先写数据库，再写缓存\"></a>先写数据库，再写缓存</h4><p>首先它可以避免之前的”假数据“问题，但是他有新的问题。</p>\n<h4 id=\"先删缓存，再写数据库\"><a href=\"#先删缓存，再写数据库\" class=\"headerlink\" title=\"先删缓存，再写数据库\"></a>先删缓存，再写数据库</h4><h4 id=\"先写数据库，再删缓存\"><a href=\"#先写数据库，再删缓存\" class=\"headerlink\" title=\"先写数据库，再删缓存\"></a>先写数据库，再删缓存</h4><p>推荐使用</p>\n<p>当然即使是这种方式还是存在着一定的问题，</p>\n<p>后续可以采用mq等方式来解决。</p>\n",
+            "tags": []
+        }
+    ]
+}

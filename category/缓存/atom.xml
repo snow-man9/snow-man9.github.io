@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://example.com</id>
+    <title>hc‘s blog • Posts by &#34;缓存&#34; category</title>
+    <link href="http://example.com" />
+    <updated>2022-08-28T06:02:50.658Z</updated>
+    <entry>
+        <id>http://example.com/2022/08/28/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E7%BC%93%E5%AD%98%E7%9A%84%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%9F/</id>
+        <title>如何保证数据库和缓存双写一致性？</title>
+        <link rel="alternate" href="http://example.com/2022/08/28/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E7%BC%93%E5%AD%98%E7%9A%84%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%9F/"/>
+        <content type="html">&lt;p&gt; 数据库和缓存的双写数据一致性问题，是一个和开发语言无关的公共问题。尤其在高并发的场景下，这个问题变得更加严重。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;常见方案&#34;&gt;&lt;a href=&#34;#常见方案&#34; class=&#34;headerlink&#34; title=&#34;常见方案&#34;&gt;&lt;/a&gt;常见方案&lt;/h4&gt;&lt;p&gt;通常情况下，我们使用缓存的目的主要是为了提升查询的性能。&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://i.imgtg.com/2023/03/09/Y9WKC.png&#34; alt=&#34;image-20220826232725235&#34;&gt;&lt;/p&gt;
+&lt;p&gt;但是如果数据库中的某条数据，在放入缓存后又立马被更新了，那该如何更新缓存呢？&lt;/p&gt;
+&lt;p&gt;目前有4种方案：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;先写缓存，再写数据库&lt;/li&gt;
+&lt;li&gt;先写数据库，再写缓存&lt;/li&gt;
+&lt;li&gt;先删缓存，再写数据库&lt;/li&gt;
+&lt;li&gt;先写数据库，再删缓存&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;先写缓存，再写数据库&#34;&gt;&lt;a href=&#34;#先写缓存，再写数据库&#34; class=&#34;headerlink&#34; title=&#34;先写缓存，再写数据库&#34;&gt;&lt;/a&gt;先写缓存，再写数据库&lt;/h4&gt;&lt;p&gt;实际上这种方案不可取。&lt;/p&gt;
+&lt;p&gt;例如用户在刚写完缓存后，网络出现了异常，导致写数据库失败了。那么缓存这种数据库不存在的”假数据“就没有意义了。&lt;/p&gt;
+&lt;h4 id=&#34;先写数据库，再写缓存&#34;&gt;&lt;a href=&#34;#先写数据库，再写缓存&#34; class=&#34;headerlink&#34; title=&#34;先写数据库，再写缓存&#34;&gt;&lt;/a&gt;先写数据库，再写缓存&lt;/h4&gt;&lt;p&gt;首先它可以避免之前的”假数据“问题，但是他有新的问题。&lt;/p&gt;
+&lt;h4 id=&#34;先删缓存，再写数据库&#34;&gt;&lt;a href=&#34;#先删缓存，再写数据库&#34; class=&#34;headerlink&#34; title=&#34;先删缓存，再写数据库&#34;&gt;&lt;/a&gt;先删缓存，再写数据库&lt;/h4&gt;&lt;h4 id=&#34;先写数据库，再删缓存&#34;&gt;&lt;a href=&#34;#先写数据库，再删缓存&#34; class=&#34;headerlink&#34; title=&#34;先写数据库，再删缓存&#34;&gt;&lt;/a&gt;先写数据库，再删缓存&lt;/h4&gt;&lt;p&gt;推荐使用&lt;/p&gt;
+&lt;p&gt;当然即使是这种方式还是存在着一定的问题，&lt;/p&gt;
+&lt;p&gt;后续可以采用mq等方式来解决。&lt;/p&gt;
+</content>
+        <updated>2022-08-28T06:02:50.658Z</updated>
+    </entry>
+</feed>

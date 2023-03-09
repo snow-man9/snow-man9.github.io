@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://example.com</id>
+    <title>hc‘s blog • Posts by &#34;arm trustzone&#34; category</title>
+    <link href="http://example.com" />
+    <updated>2021-09-01T12:41:18.848Z</updated>
+    <entry>
+        <id>http://example.com/2021/09/01/OP-TEE%E4%B8%ADTA%E4%B8%8ECA%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3-------%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E7%AF%87/</id>
+        <title>OP-TEE中TA与CA执行流程详解-------软件架构篇</title>
+        <link rel="alternate" href="http://example.com/2021/09/01/OP-TEE%E4%B8%ADTA%E4%B8%8ECA%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3-------%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E7%AF%87/"/>
+        <content type="html">&lt;p&gt;要使用OP-TEE来实现特定的安全功能就需要开发者根据自己的实际需求开发特定的CA和TA程序，并将TA集成到OP-TEE中。CA端负责实现在RTOS端userspace层面的对外接口，而TA端的代码则是在OP-TEE OS的userspace层面负责实现具体的安全功能，例如使用何种算法组合来对数据进行安全处理，对处理后的数据的安全保存，解密加密数据等等功能。接下来的章节将详细介绍CA到TA之间的所有流程以及相关结构体设置，接口调用等等，关于如何在OP-TEE中添加自有的TA和CA程序请参考文档《2. OP-TEE中添加自己的TA和CA》。关于OP-TEE的中断处理的流程请查阅《OP-TEE中的中断处理》相关文章，接下来的章节将介绍不考虑中断的情况下，一个完整的TA和CA之间进行调用的完整过程分析。下图为系统中CA与TA之间执行的软件框图。&lt;br&gt;&lt;img data-src=&#34;https://img-blog.csdn.net/20170605181857665?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2h1YWlmZW5neXVu/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+</content>
+        <updated>2021-09-01T12:41:18.848Z</updated>
+    </entry>
+    <entry>
+        <id>http://example.com/2021/09/01/OP-TEE%E4%B8%ADCA%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B------%E7%B3%BB%E7%BB%9F%E5%90%84%E5%B1%82%E9%9D%A2%E5%85%B3%E7%B3%BB/</id>
+        <title>OP-TEE中CA接口调用的完整流程------系统各层面关系</title>
+        <link rel="alternate" href="http://example.com/2021/09/01/OP-TEE%E4%B8%ADCA%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B------%E7%B3%BB%E7%BB%9F%E5%90%84%E5%B1%82%E9%9D%A2%E5%85%B3%E7%B3%BB/"/>
+        <content type="html">&lt;h1 id=&#34;OP-TEE中CA接口调用的完整流程——系统各层面关系&#34;&gt;&lt;a href=&#34;#OP-TEE中CA接口调用的完整流程——系统各层面关系&#34; class=&#34;headerlink&#34; title=&#34;OP-TEE中CA接口调用的完整流程——系统各层面关系&#34;&gt;&lt;/a&gt;OP-TEE中CA接口调用的完整流程——系统各层面关系&lt;/h1&gt;&lt;p&gt;二级厂商需要实现自有feature，需要添加自己的TA 和CA接口，当CA部分的接口需要提供给app层面调用的时候，一般做法是在framwork中建立特定的service，在service中调用CA接口。同时也会建立对应的client部分，一般做法是在framwork中建立特定的service，在service中调用CA接口，同时也会建立对应的client部分，client部分与service部分通过Binder的方式进行同行来触发CA接口调用的操作。而对于APP层面，开发者会将client部分提供的接口以JNI的方式进行封装暴露给上层APP调用。&lt;/p&gt;
+&lt;p&gt;当上层APP调用封装好的JNI接口后，CA接口是如何通知特定的TA执行特定操作的呢？CA与TA之间的数据是如何传递的呢？cortex的状态是如何切换的呢？本文将详细讲解一次CA接口调用后功能实现的完整流程（本文不讨论FIQ和IRQ的情况，只讨论通过调用SMC指令调用到TEE的情况）。&lt;/p&gt;
+&lt;h2 id=&#34;1-支持TEE的系统各层面关系图&#34;&gt;&lt;a href=&#34;#1-支持TEE的系统各层面关系图&#34; class=&#34;headerlink&#34; title=&#34;1.支持TEE的系统各层面关系图&#34;&gt;&lt;/a&gt;1.支持TEE的系统各层面关系图&lt;/h2&gt;&lt;p&gt;下图为层面结构图：&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdn.net/20170511210006850&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;　当CA接口处于userspace层面，整个调用过程需要经过kernel space层面， linux driver层面， Monitor态中断处理层面， TEE OS kernel层面， TEE的userspace层面（TA）。&lt;/p&gt;
+&lt;h2 id=&#34;2-userspace到kernelspace&#34;&gt;&lt;a href=&#34;#2-userspace到kernelspace&#34; class=&#34;headerlink&#34; title=&#34;2.userspace到kernelspace&#34;&gt;&lt;/a&gt;2.userspace到kernelspace&lt;/h2&gt;&lt;p&gt;在userspace层面调用CA接口后会触发system call操作，系统调用会将Lixnux陷入内核态，此时系统处于kernel space，然后根据传入的参数，找到对应的TEE driver，整个过程大致如下：&lt;/p&gt;
+&lt;p&gt;&lt;img data-src=&#34;https://img-blog.csdn.net/20170511210145320&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;关于该部分更加详细的内容，例如：软中断如何在kernel中注册的，系统调用的定义等等可查找系统调用（systemcall）和驱动的相关资料进行了解。&lt;/p&gt;
+&lt;h2 id=&#34;3-TEE-driver到monitor态&#34;&gt;&lt;a href=&#34;#3-TEE-driver到monitor态&#34; class=&#34;headerlink&#34; title=&#34;3.TEE driver到monitor态&#34;&gt;&lt;/a&gt;3.TEE driver到monitor态&lt;/h2&gt;&lt;p&gt;在TEE的driver中，最终会调用SMC这条汇编指令来实现与OP-TEE的沟通，当调用SMC汇编指令之后，会触发SMC软中断，改软中断的处理在Cortex的Monitor态中进行，该软中断会根据发送指令是属于安全侧请求哈市非安全侧的请求来控制是将cortex切换到secure world态还是non-secure world态。该切换动作在ATF的SMC中断处理函数中被实现。&lt;/p&gt;
+&lt;h2 id=&#34;4-TEE-kernel-space到TEE-userspace&#34;&gt;&lt;a href=&#34;#4-TEE-kernel-space到TEE-userspace&#34; class=&#34;headerlink&#34; title=&#34;4.TEE kernel space到TEE userspace&#34;&gt;&lt;/a&gt;4.TEE kernel space到TEE userspace&lt;/h2&gt;&lt;p&gt;当SMC中断处理函数完成了将cortex的状态切换到secure world态以及相关参数的拷贝动作之后，TEE OS将接管剩下的操作。TEE OS首先将会获取从CA端传递过来的数据，然后解析出数据中写入的TA的UUID，然后查找对应的TA image是否被挂载到了 TEE OS中。&lt;/p&gt;
+&lt;p&gt;　　如果没有TEE OS将会与常驻在linux中的tee_supplicant进程通信，从文件系统中获取到TA image文件，并传递給TEE OS，然后加载该TA image。处理完整之后，TEE OS会切换到TEE userspace态，并将CA传递过来的其他参数传给具体的TA process，TA process获取到参数后，首先需要解除出参数中的commond ID值，根据具体的command ID值来做具体的操作。&lt;/p&gt;
+&lt;p&gt;当然TEE OS在加载TA image的时候会有电子验签操作来验证TA image的合法性。上述步骤的大致流程图如下：&lt;br&gt;&lt;img data-src=&#34;https://img-blog.csdn.net/20170511210437602&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;由于一次完整的CA调用过程需要做一次调用执行initContext, Opensession, InvokeCommand, close session, FinalizeContext操作，所以上图只是大致流程，关于详细部分将会在后期章节中节后代码逐步讲解。&lt;/p&gt;
+&lt;h2 id=&#34;5-GP规定的C端接口&#34;&gt;&lt;a href=&#34;#5-GP规定的C端接口&#34; class=&#34;headerlink&#34; title=&#34;5.GP规定的C端接口&#34;&gt;&lt;/a&gt;5.GP规定的C端接口&lt;/h2&gt;&lt;p&gt;在GP中规定的CA端接口较少，主要的是五个接口，分别如下：&lt;/p&gt;
+&lt;p&gt;TEEC_InitializeContext: 初始化TEE context，完成open tee driver，建立与TEE之间的context&lt;/p&gt;
+&lt;p&gt;TEEC_OpenSession: 建立CA与TA之间的会话窗口&lt;/p&gt;
+&lt;p&gt;TEEC_InvokeCommand: 想TA发送执行请求来执行具体的操作&lt;/p&gt;
+&lt;p&gt;TEEC_CloseSession: 关闭CA与TA之间的会话窗口&lt;/p&gt;
+&lt;p&gt;TEEC_FinalizeContext:清空建立的contex&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;转载自：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NodWFpZmVuZ3l1bi9hcnRpY2xlL2RldGFpbHMvNzE2OTczNzE=&#34;&gt;https://blog.csdn.net/shuaifengyun/article/details/71697371&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;自己差不多抄了一遍，大概流程看了一下，还是有些细节不太懂。很多操作没有见过，也不知道为什么要这样做。&lt;/p&gt;
+</content>
+        <updated>2021-09-01T11:31:10.665Z</updated>
+    </entry>
+    <entry>
+        <id>http://example.com/2021/08/27/3%20Modern%20Trusted%20Computing%20Hardware/</id>
+        <title>3 Modern Trusted Computing Hardware</title>
+        <link rel="alternate" href="http://example.com/2021/08/27/3%20Modern%20Trusted%20Computing%20Hardware/"/>
+        <content type="html">&lt;p&gt;本章介绍了ARM TrustZone的背景及其缺点。&lt;/p&gt;
+&lt;h2 id=&#34;3-1-ARM-TrustZone&#34;&gt;&lt;a href=&#34;#3-1-ARM-TrustZone&#34; class=&#34;headerlink&#34; title=&#34;3.1 ARM TrustZone&#34;&gt;&lt;/a&gt;3.1 &lt;strong&gt;ARM TrustZone&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;ARM TrustZone 是 ARM 对可信计算的硬件支持。它是在许多最新的 ARM 处理器（包括 Cortex A8、Cortex A9 和 Cortex A15）中发现的一组安全扩展。 ARM TrustZone 提供两个由硬件访问控制支持的虚拟处理器。分别为secure world(SW)和normal world (NW)，根据单个 ARM SoC 的具体情况，单个资源可以在两个世界之间进行强分区，可以跨世界共享，或仅分配给单个世界。&lt;/p&gt;
+&lt;h3 id=&#34;Secure-monitor&#34;&gt;&lt;a href=&#34;#Secure-monitor&#34; class=&#34;headerlink&#34; title=&#34;Secure monitor.&#34;&gt;&lt;/a&gt;&lt;strong&gt;Secure monitor.&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;安全监视器是一种 ARM 处理器模式，旨在在安全和正常世界之间切换&lt;/p&gt;
+&lt;h3 id=&#34;Secure-world-entry-exit&#34;&gt;&lt;a href=&#34;#Secure-world-entry-exit&#34; class=&#34;headerlink&#34; title=&#34;Secure world entry/exit.&#34;&gt;&lt;/a&gt;&lt;strong&gt;Secure world entry/exit.&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;根据设计，ARM 平台总是首先进入安全世界。 在这里，系统固件可以在任何不受信任的代码（例如操作系统）有机会运行之前提供安全世界的运行时环境。&lt;/p&gt;
+&lt;h3 id=&#34;Curtained-memory&#34;&gt;&lt;a href=&#34;#Curtained-memory&#34; class=&#34;headerlink&#34; title=&#34;Curtained memory&#34;&gt;&lt;/a&gt;&lt;strong&gt;Curtained memory&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;在启动时，在安全监视器中运行的软件可以仅将一系列物理地址分配给安全世界，从而创建窗帘内存的抽象——系统其余部分无法访问内存。&lt;/p&gt;
+&lt;h2 id=&#34;3-2-Shortcomings-of-ARM-TrustZone&#34;&gt;&lt;a href=&#34;#3-2-Shortcomings-of-ARM-TrustZone&#34; class=&#34;headerlink&#34; title=&#34;3.2 Shortcomings of ARM TrustZone&#34;&gt;&lt;/a&gt;&lt;strong&gt;3.2 Shortcomings of ARM TrustZone&lt;/strong&gt;&lt;/h2&gt;&lt;p&gt;尽管 ARM TrustZone 规范描述了在安全世界中如何保护处理器和内存子系统，该规范没有说明应该如何保护大多数其他资源。 这导致了碎片化——SoC 为 TrustZone 提供了各种形式的不同硬件资源保护，或者根本没有保护。&lt;/p&gt;
+&lt;h3 id=&#34;Storage-（No-trusted-storage）&#34;&gt;&lt;a href=&#34;#Storage-（No-trusted-storage）&#34; class=&#34;headerlink&#34; title=&#34;*Storage.*（No trusted storage）&#34;&gt;&lt;/a&gt;*Storage.*（No trusted storage）&lt;/h3&gt;&lt;p&gt;令人惊讶的是，ARM TrustZone 规范没有提供有关如何为 TrustZone 实施安全存储的指南。 缺乏安全存储大大降低了 TrustZone 作为可信计算硬件的有效性。&lt;/p&gt;
+&lt;h3 id=&#34;Crypto-needs-（No-trusted-storage）&#34;&gt;&lt;a href=&#34;#Crypto-needs-（No-trusted-storage）&#34; class=&#34;headerlink&#34; title=&#34;**Crypto needs.**（No trusted storage）&#34;&gt;&lt;/a&gt;**Crypto needs.**（No trusted storage）&lt;/h3&gt;&lt;p&gt;大多数受信任的系统都使用密码学。 然而，该规范并未提及提供安全的熵源或单调递增的计数器。&lt;/p&gt;
+&lt;h3 id=&#34;Lack-of-virtualization&#34;&gt;&lt;a href=&#34;#Lack-of-virtualization&#34; class=&#34;headerlink&#34; title=&#34;Lack of virtualization.&#34;&gt;&lt;/a&gt;&lt;strong&gt;Lack of virtualization.&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;当今移动设备中使用的大多数基于 ARM 的 SoC 都缺乏虚拟化支持。 在缺乏虚拟化硬件辅助的 ARM 平台上虚拟化商用操作系统（例如 Windows）非常困难。&lt;/p&gt;
+&lt;h3 id=&#34;Lack-of-secure-clock-and-other-peripherals&#34;&gt;&lt;a href=&#34;#Lack-of-secure-clock-and-other-peripherals&#34; class=&#34;headerlink&#34; title=&#34;Lack of secure clock (and other peripherals).&#34;&gt;&lt;/a&gt;&lt;strong&gt;Lack of secure clock (and other peripherals).&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;系统通常需要一个安全时钟。 虽然 TrustZone&lt;br&gt;访问受保护的内存和中断是向提供安全外设迈出的一步，但如果不保护可以与这些外设通信的总线控制器，通常是不够的。&lt;/p&gt;
+&lt;h3 id=&#34;Lack-of-access&#34;&gt;&lt;a href=&#34;#Lack-of-access&#34; class=&#34;headerlink&#34; title=&#34;Lack of access&#34;&gt;&lt;/a&gt;&lt;strong&gt;Lack of access&lt;/strong&gt;&lt;/h3&gt;&lt;p&gt;大多数 SoC 硬件供应商不提供对其固件的访问。 因此，许多开发人员和研究人员无法找到将他们的系统或原型部署到 TrustZone 的方法。&lt;/p&gt;
+</content>
+        <updated>2021-08-27T07:40:49.262Z</updated>
+    </entry>
+    <entry>
+        <id>http://example.com/2021/08/20/TZ%E5%AD%A6%E4%B9%A0%E7%BB%84%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%932021.8.9-2021.8.20/</id>
+        <title>TZ学习组学习总结2021.8.9-2021.8.20</title>
+        <link rel="alternate" href="http://example.com/2021/08/20/TZ%E5%AD%A6%E4%B9%A0%E7%BB%84%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%932021.8.9-2021.8.20/"/>
+        <content type="html">&lt;p&gt;姓名：胡晨    &lt;/p&gt;
+&lt;h2 id=&#34;一、-本段时间的学习内容：&#34;&gt;&lt;a href=&#34;#一、-本段时间的学习内容：&#34; class=&#34;headerlink&#34; title=&#34;一、 本段时间的学习内容：&#34;&gt;&lt;/a&gt;一、 本段时间的学习内容：&lt;/h2&gt;&lt;h3 id=&#34;A-学习的详细内容1：成功搭建optee环境。&#34;&gt;&lt;a href=&#34;#A-学习的详细内容1：成功搭建optee环境。&#34; class=&#34;headerlink&#34; title=&#34;A. 学习的详细内容1：成功搭建optee环境。&#34;&gt;&lt;/a&gt;A. 学习的详细内容1：成功搭建optee环境。&lt;/h3&gt;&lt;p&gt;学习成果1：进度安排（各工作是否达到预期等）：达到。&lt;/p&gt;
+&lt;h3 id=&#34;B-学习的内容2：实践TA-CA的简单套路，了解了执行的流程，看了一些相关的视频（https-www-bilibili-com-video-BV1L4411N7gZ-p-1）和博客（https-icyshuai-blog-csdn-net-article-details-73716352）&#34;&gt;&lt;a href=&#34;#B-学习的内容2：实践TA-CA的简单套路，了解了执行的流程，看了一些相关的视频（https-www-bilibili-com-video-BV1L4411N7gZ-p-1）和博客（https-icyshuai-blog-csdn-net-article-details-73716352）&#34; class=&#34;headerlink&#34; title=&#34;B.学习的内容2：实践TA,CA的简单套路，了解了执行的流程，看了一些相关的视频（https://www.bilibili.com/video/BV1L4411N7gZ?p=1）和博客（https://icyshuai.blog.csdn.net/article/details/73716352）&#34;&gt;&lt;/a&gt;B.学习的内容2：实践TA,CA的简单套路，了解了执行的流程，看了一些相关的视频（&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL3ZpZGVvL0JWMUw0NDExTjdnWj9wPTElRUYlQkMlODklRTUlOTIlOEMlRTUlOEQlOUElRTUlQUUlQTIlRUYlQkMlODhodHRwczovL2ljeXNodWFpLmJsb2cuY3Nkbi5uZXQvYXJ0aWNsZS9kZXRhaWxzLzczNzE2MzUyJUVGJUJDJTg5&#34;&gt;https://www.bilibili.com/video/BV1L4411N7gZ?p=1）和博客（https://icyshuai.blog.csdn.net/article/details/73716352）&lt;/span&gt;&lt;/h3&gt;&lt;p&gt;学习成果2：进度安排（各工作是否达到预期等）：达到。&lt;/p&gt;
+&lt;h2 id=&#34;二、困难和解决方案：&#34;&gt;&lt;a href=&#34;#二、困难和解决方案：&#34; class=&#34;headerlink&#34; title=&#34;二、困难和解决方案：&#34;&gt;&lt;/a&gt;二、困难和解决方案：&lt;/h2&gt;&lt;p&gt;以下给出我总结的 optee 环境搭建方法（经过多次尝试，该方法可将时间缩短到两小时内，且必成功）：&lt;/p&gt;
+&lt;p&gt;1.首先，unbuntu选择18.04版本，这是一切的基础，想必大家都知道版本的重要。（其他版本可能或多或少有难以解决的问题）。给出下载网址：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL21pcnJvcnMuMTYzLmNvbS91YnVudHUtcmVsZWFzZXMvMTguMDQv&#34;&gt;http://mirrors.163.com/ubuntu-releases/18.04/&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;2.使用如下指令安装搭建时需要的工具和库（此时使用Ubuntu18.04不会有任何报错，但是其他版本会有包安装不了，从而会导致后面一些莫名其妙的错误。）：&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install android-tools-adb android-tools-fastboot autoconf \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	automake bc bison build-essential cscope curl device-tree-compiler \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	expect flex ftp-upload gdisk iasl libattr1-dev libc6:i386 libcap-dev \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	libfdt-dev libftdi-dev libglib2.0-dev libhidapi-dev libncurses5-dev \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	libpixman-1-dev libssl-dev libstdc++6:i386 libtool libz1:i386 make \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	mtools netcat python-crypto python-serial python-wand unzip uuid-dev \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	xdg-utils xterm xz-utils zlib1g-dev&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;3.下载OP-TEE的源代码&lt;/p&gt;
+&lt;p&gt;此时直接从网盘中下载就可以了，千万不要自己同步，可能出现python版本不对等问题网盘链接如下：&lt;/p&gt;
+&lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3MvMVQ5dHNPblEzRWJ6OXdtN2liekJMcHc=&#34;&gt;https://pan.baidu.com/s/1T9tsOnQ3Ebz9wm7ibzBLpw&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;提取码: cd94&lt;/p&gt;
+&lt;p&gt;把压缩包复制到ubuntu中再解压就可以了（解压出来的文件层数过多，例如 /op-tee/OP-TEE/…. ,可以只留一个大文件目录方便操作）&lt;/p&gt;
+&lt;p&gt;5.获取toolchain&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ cd build&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ make -f qemu.mk all&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;6.启动qemu（仍然在build目录下）&lt;/p&gt;
+&lt;p&gt;如果你不信邪，直接执行下面命令：&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ make -f qemu.mk run-only&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;此时必然会出现一个问题：&lt;/p&gt;
+&lt;p&gt;*** [/home/rhj0/open-tee/qemu/rules.mak:69：util/memfd.o] 错误 1&lt;/p&gt;
+&lt;p&gt;此时就需要修改文件里的代码。（可以直接在文件里搜索关键代码，方便寻找）&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&amp;#x2F;&amp;#x2F; qemu&amp;#x2F;util&amp;#x2F;memfd.c文件中的： &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;#ifdef CONFIG_MEMFD &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;#include &amp;lt;sys&amp;#x2F;memfd.h&amp;gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;#elif defined CONFIG_LINUX &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#x2F;&amp;#x2F; 改为： #if defined CONFIG_LINUX &amp;amp;&amp;amp; !defined CONFIG_MEMFD &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#x2F;&amp;#x2F; qemu&amp;#x2F;configure文件中的： &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;#include &amp;lt;sys&amp;#x2F;memfd.h&amp;gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#x2F;&amp;#x2F; 改为： #include &amp;lt;sys&amp;#x2F;mman.h&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;附上官方的更改链接（更改和上面一样）：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXQucWVtdS5vcmcvP3A9cWVtdS5naXQ7YT1jb21taXRkaWZmO2g9NzVlNWI3MGU2YjVkY2M0ZjIyMTk5OTJkN2NmZmE0NjJhYTQwNmFmMDtocD0yMDA3ODBhM2EzZWQwNjdkZmIyZTBkMjIxMGIwZWQwOWU3NDhiYTI2&#34;&gt;https://git.qemu.org/?p=qemu.git;a=commitdiff;h=75e5b70e6b5dcc4f2219992d7cffa462aa406af0;hp=200780a3a3ed067dfb2e0d2210b0ed09e748ba26&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;再次执行：&lt;/p&gt;
+&lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ make -f qemu.mk run-only&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;就大功告成了。总耗时应该不超过两个小时，甚至网速快的话十几分钟就可以了。&lt;/p&gt;
+&lt;p&gt;（以上全是踩坑踩出来的经验和各个评论区大佬的解决方案，本人只是汇总找了条最简单的路）&lt;/p&gt;
+&lt;p&gt;对比别的教程把下载和同步源码改成了网盘下载，大大减少了不必要的麻烦。&lt;/p&gt;
+&lt;p&gt;最后感谢：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL3ZpZGVvL0JWMUw0NDExTjdnWj9mcm9tPXNlYXJjaCZhbXA7c2VpZD0zMjU2MTgxNDQ5MjU3MjEzODExJUVGJUJDJTg4KiolRTYlOEUlQTglRTglOEQlOTAlRTglQTclODIlRTclOUMlOEIqKiVFRiVCQyU4OQ==&#34;&gt;https://www.bilibili.com/video/BV1L4411N7gZ?from=search&amp;amp;seid=3256181449257213811（**推荐观看**）&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;和&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9pY3lzaHVhaS5ibG9nLmNzZG4ubmV0L2FydGljbGUvZGV0YWlscy83MTQ5OTYxOQ==&#34;&gt;https://icyshuai.blog.csdn.net/article/details/71499619&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;三、 下周预期安排&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;下期进度安排：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;尽快熟悉TA和CA的用法&lt;/p&gt;
+</content>
+        <updated>2021-08-20T10:43:25.579Z</updated>
+    </entry>
+</feed>

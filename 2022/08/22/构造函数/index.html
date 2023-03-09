@@ -30,7 +30,7 @@
 
 
   <title>
-构造函数 |
+构造函数 - Java |
 Yume Shoka = hc‘s blog</title>
 <meta name="generator" content="Hexo 5.4.0"></head>
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -100,12 +100,12 @@ Yume Shoka = hc‘s blog</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicljitigmj20zk0m87fp.jpg"></li>
-          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipetlbztpj20zk0m84qp.jpg"></li>
-          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipeyvx1d4j20zk0m8hdt.jpg"></li>
-          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicitf0kl1j20zk0m87fe.jpg"></li>
-          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipexoj0moj20zk0m8kgu.jpg"></li>
-          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclhtuo6nj20zk0m8ttm.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicitht3xtj20zk0m8k5v.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclga70tsj20zk0m84mr.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeuv80yoj20zk0m8kjl.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicljitigmj20zk0m87fp.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gipeu1usa7j20zk0m8b29.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclxfdlttj20zk0m8npd.jpg"></li>
         </ul>
       </div>
     </header>
@@ -130,7 +130,9 @@ Yume Shoka = hc‘s blog</title>
     
 <div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
 <i class="ic i-home"></i>
-<span><a href="/">Home</a></span>
+<span><a href="/">Home</a></span><i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/Java/" itemprop="item" rel="index" title="In Java"><span itemprop="name">Java</span></a>
+<meta itemprop="position" content="1" /></span>
 </div>
 
     <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
@@ -138,7 +140,7 @@ Yume Shoka = hc‘s blog</title>
 
   <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
     <meta itemprop="image" content="/images/avatar.jpg">
-    <meta itemprop="name" content="John Doe">
+    <meta itemprop="name" content="deku酱">
     <meta itemprop="description" content=", ">
   </span>
 
@@ -150,7 +152,7 @@ Yume Shoka = hc‘s blog</title>
     
 
     <p>主要用来创建对象时初始化对象，即为对象那个 成员变量赋初始值，总与new运算符一起使用在创建对象的语句中。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 矩形</span><br><span class="hljs-comment">*/</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Rectangle</span> </span>&#123;<br><br>     <span class="hljs-comment">/**</span><br><span class="hljs-comment">      * 构造函数</span><br><span class="hljs-comment">      */</span><br>     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Rectangle</span><span class="hljs-params">(<span class="hljs-keyword">int</span> length, <span class="hljs-keyword">int</span> width)</span> </span>&#123;<br>         <span class="hljs-keyword">this</span>.length = length;<br>         <span class="hljs-keyword">this</span>.width = width;<br>     &#125;<br>     <br>     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span> <span class="hljs-params">(String []args)</span></span>&#123;<br>        <span class="hljs-comment">//使用构造函数创建对象</span><br>        Rectangle rectangle = <span class="hljs-keyword">new</span> Rectangle(<span class="hljs-number">10</span>,<span class="hljs-number">5</span>);<br>        <br>     &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 矩形</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rectangle</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">     <span class="comment">/**</span></span><br><span class="line"><span class="comment">      * 构造函数</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="title">Rectangle</span><span class="params">(<span class="keyword">int</span> length, <span class="keyword">int</span> width)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">this</span>.length = length;</span><br><span class="line">         <span class="keyword">this</span>.width = width;</span><br><span class="line">     &#125;</span><br><span class="line">     </span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span> <span class="params">(String []args)</span></span>&#123;</span><br><span class="line">        <span class="comment">//使用构造函数创建对象</span></span><br><span class="line">        Rectangle rectangle = <span class="keyword">new</span> Rectangle(<span class="number">10</span>,<span class="number">5</span>);</span><br><span class="line">        </span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 <p>特别的一个类可以有多个构造函数，可根据其参数个数的不同或参数类型的不同来区分它们即构造函数的重载。</p>
 <p>构造函数跟一般的实例方法十分相似；但是与其它方法不同，构造器没有返回类型，不会被继承，且可以有范围修饰符。</p>
@@ -158,7 +160,7 @@ Yume Shoka = hc‘s blog</title>
 <p>如果在编写一个可实例化的类时没有专门编写构造函数，多数编程语言会自动生成缺省构造器（默认构造函数）。默认构造函数一般会把成员变量的值初始化为默认值，如int -&gt; 0，Integer -&gt; null。</p>
 <p>如果在编写一个可实例化的类时没有专门编写构造函数，默认情况下，一个Java类中会自动生成一个默认无参构造函数。默认构造函数一般会把成员变量的值初始化为默认值，如int -&gt; 0，Integer -&gt; null。</p>
 <p>但是，如果我们手动在某个类中定义了一个有参数的构造函数，那么这个默认的无参构造函数就不会自动添加了。需要手动创建！</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**</span><br><span class="hljs-comment">* 矩形</span><br><span class="hljs-comment">*/</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Rectangle</span> </span>&#123;<br><br>     <span class="hljs-comment">/**</span><br><span class="hljs-comment">      * 构造函数</span><br><span class="hljs-comment">      */</span><br>     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Rectangle</span><span class="hljs-params">(<span class="hljs-keyword">int</span> length, <span class="hljs-keyword">int</span> width)</span> </span>&#123;<br>         <span class="hljs-keyword">this</span>.length = length;<br>         <span class="hljs-keyword">this</span>.width = width;<br>     &#125;<br>     <br>     <span class="hljs-comment">/**</span><br><span class="hljs-comment">      * 无参构造函数</span><br><span class="hljs-comment">      */</span><br>     <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Rectangle</span><span class="hljs-params">()</span> </span>&#123;<br>         <br>     &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">* 矩形</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Rectangle</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">     <span class="comment">/**</span></span><br><span class="line"><span class="comment">      * 构造函数</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="title">Rectangle</span><span class="params">(<span class="keyword">int</span> length, <span class="keyword">int</span> width)</span> </span>&#123;</span><br><span class="line">         <span class="keyword">this</span>.length = length;</span><br><span class="line">         <span class="keyword">this</span>.width = width;</span><br><span class="line">     &#125;</span><br><span class="line">     </span><br><span class="line">     <span class="comment">/**</span></span><br><span class="line"><span class="comment">      * 无参构造函数</span></span><br><span class="line"><span class="comment">      */</span></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="title">Rectangle</span><span class="params">()</span> </span>&#123;</span><br><span class="line">         </span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
 
   </div>
@@ -171,7 +173,7 @@ Yume Shoka = hc‘s blog</title>
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">Edited on</span>
-    <time title="Modified: 2022-08-22 15:27:34" itemprop="dateModified" datetime="2022-08-22T15:27:34+08:00">2022-08-22</time>
+    <time title="Modified: 2023-03-09 22:03:09" itemprop="dateModified" datetime="2023-03-09T22:03:09+08:00">2023-03-09</time>
   </span>
 </div>
 
@@ -182,17 +184,17 @@ Yume Shoka = hc‘s blog</title>
   <div id="qr">
       
       <div>
-        <img data-src="/images/wechatpay.png" alt="John Doe WeChat Pay">
+        <img data-src="/images/wechatpay.png" alt="deku酱 WeChat Pay">
         <p>WeChat Pay</p>
       </div>
       
       <div>
-        <img data-src="/images/alipay.png" alt="John Doe Alipay">
+        <img data-src="/images/alipay.png" alt="deku酱 Alipay">
         <p>Alipay</p>
       </div>
       
       <div>
-        <img data-src="/images/paypal.png" alt="John Doe PayPal">
+        <img data-src="/images/paypal.png" alt="deku酱 PayPal">
         <p>PayPal</p>
       </div>
   </div>
@@ -203,7 +205,7 @@ Yume Shoka = hc‘s blog</title>
 <div id="copyright">
 <ul>
   <li class="author">
-    <strong>Post author:  </strong>John Doe <i class="ic i-at"><em>@</em></i>hc‘s blog
+    <strong>Post author:  </strong>deku酱 <i class="ic i-at"><em>@</em></i>hc‘s blog
   </li>
   <li class="link">
     <strong>Post link: </strong>
@@ -226,9 +228,9 @@ Yume Shoka = hc‘s blog</title>
     <div class="item left">
       
 
-  <a href="/2022/08/22/%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99%E5%92%8C%E9%87%8D%E8%BD%BD/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicm0fdw5cj20zk0m8hdt.jpg" title="方法重写和重载">
+  <a href="/2022/08/22/%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99%E5%92%8C%E9%87%8D%E8%BD%BD/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclxfdlttj20zk0m8npd.jpg" title="方法重写和重载">
   <span class="type">Previous Post</span>
-  <span class="category"><i class="ic i-flag"></i> </span>
+  <span class="category"><i class="ic i-flag"></i> Java</span>
   <h3>方法重写和重载</h3>
   </a>
 
@@ -236,9 +238,9 @@ Yume Shoka = hc‘s blog</title>
     <div class="item right">
       
 
-  <a href="/2022/08/22/%E7%B1%BB%E5%8F%98%E9%87%8F%E3%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E5%92%8C%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giciryrr3rj20zk0m8nhk.jpg" title="类变量，成员变量和局部变量">
+  <a href="/2022/08/22/%E7%B1%BB%E5%8F%98%E9%87%8F%E3%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E5%92%8C%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclh3brzpj20zk0m8ann.jpg" title="类变量，成员变量和局部变量">
   <span class="type">Next Post</span>
-  <span class="category"><i class="ic i-flag"></i> </span>
+  <span class="category"><i class="ic i-flag"></i> Java</span>
   <h3>类变量，成员变量和局部变量</h3>
   </a>
 
@@ -260,25 +262,35 @@ Yume Shoka = hc‘s blog</title>
       <div class="contents panel pjax" data-title="Contents">
       </div>
       <div class="related panel pjax" data-title="Related">
+        <ul>
+          <li><a href="/2022/08/19/java%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81/" rel="bookmark" title="java中的多态">java中的多态</a></li><li><a href="/2022/08/21/%E5%A4%9A%E7%BB%A7%E6%89%BF%E9%97%AE%E9%A2%98/" rel="bookmark" title="多继承问题">多继承问题</a></li><li><a href="/2022/08/22/%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99%E5%92%8C%E9%87%8D%E8%BD%BD/" rel="bookmark" title="方法重写和重载">方法重写和重载</a></li><li class="active"><a href="/2022/08/22/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" rel="bookmark" title="构造函数">构造函数</a></li><li><a href="/2022/08/22/%E7%B1%BB%E5%8F%98%E9%87%8F%E3%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E5%92%8C%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/" rel="bookmark" title="类变量，成员变量和局部变量">类变量，成员变量和局部变量</a></li><li><a href="/2022/08/22/%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E8%83%BD%E7%94%A8%E6%B5%AE%E7%82%B9%E5%9E%8B%E8%A1%A8%E7%A4%BA%E9%87%91%E9%A2%9D/" rel="bookmark" title="为什么不能用浮点型表示金额">为什么不能用浮点型表示金额</a></li><li><a href="/2022/08/27/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8%EF%BC%881%EF%BC%89%EF%BC%9A%E5%8F%AF%E8%A7%81%E6%80%A7%E3%80%81%E5%8E%9F%E5%AD%90%E6%80%A7%E5%92%8C%E6%9C%89%E5%BA%8F%E6%80%A7/" rel="bookmark" title="并发编程入门（1）：可见性、原子性和有序性">并发编程入门（1）：可见性、原子性和有序性</a></li><li><a href="/2022/08/28/Spring%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E6%9C%89%E5%87%A0%E7%A7%8D%EF%BC%9F%E5%90%84%E8%87%AA%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E7%BC%BA%E7%82%B9%EF%BC%9F/" rel="bookmark" title="Spring依赖注入有几种？各自有什么优缺点？">Spring依赖注入有几种？各自有什么优缺点？</a></li>
+        </ul>
       </div>
       <div class="overview panel" data-title="Overview">
         <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
-  <img class="image" itemprop="image" alt="John Doe"
+  <img class="image" itemprop="image" alt="deku酱"
       data-src="/images/avatar.jpg">
-  <p class="name" itemprop="name">John Doe</p>
+  <p class="name" itemprop="name">deku酱</p>
   <div class="description" itemprop="description"></div>
 </div>
 
 <nav class="state">
     <div class="item posts">
       <a href="/archives/">
-        <span class="count">23</span>
+        <span class="count">24</span>
         <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">9</span>
+        <span class="name">categories</span>
       </a>
     </div>
 </nav>
 
 <div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Nub3ctbWFuOQ==" title="https:&#x2F;&#x2F;github.com&#x2F;snow-man9"><i class="ic i-github"></i></span>
 </div>
 
 <ul class="menu">
@@ -286,6 +298,37 @@ Yume Shoka = hc‘s blog</title>
     
   <li class="item">
     <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>About</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>Posts</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>Archives</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>Friends</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/links/" rel="section"><i class="ic i-magic"></i>Links</a>
   </li>
 
 
@@ -324,45 +367,10 @@ Yume Shoka = hc‘s blog</title>
   <li class="item">
     
 <div class="breadcrumb">
-</div>
-
-    <span><a href="/2022/08/22/%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99%E5%92%8C%E9%87%8D%E8%BD%BD/" title="方法重写和重载">方法重写和重载</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2022/08/22/%E7%B1%BB%E5%8F%98%E9%87%8F%E3%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E5%92%8C%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/" title="类变量，成员变量和局部变量">类变量，成员变量和局部变量</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2021/03/03/static/" title="C中static的运用">C中static的运用</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
+<a href="/categories/%E6%84%9F%E6%83%B3/" title="In 感想">感想</a>
 </div>
 
     <span><a href="/2021/03/05/3.4%E7%9A%84%E6%84%9F%E6%83%B3/" title="怎么说呢，有点沉不下心来">怎么说呢，有点沉不下心来</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2021/03/07/c%E7%9A%84%E5%8A%A8%E6%80%81%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D/" title="C的动态内存分配">C的动态内存分配</a></span>
   </li>
 
       
@@ -378,36 +386,80 @@ Yume Shoka = hc‘s blog</title>
   <li class="item">
     
 <div class="breadcrumb">
+<a href="/categories/Java/" title="In Java">Java</a>
 </div>
 
-    <span><a href="/2022/08/28/Spring%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E6%9C%89%E5%87%A0%E7%A7%8D%EF%BC%9F%E5%90%84%E8%87%AA%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E7%BC%BA%E7%82%B9%EF%BC%9F/" title="Spring依赖注入有几种？各自有什么优缺点？">Spring依赖注入有几种？各自有什么优缺点？</a></span>
+    <span><a href="/2022/08/22/%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99%E5%92%8C%E9%87%8D%E8%BD%BD/" title="方法重写和重载">方法重写和重载</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
+<a href="/categories/%E6%84%9F%E6%83%B3/" title="In 感想">感想</a>
 </div>
 
-    <span><a href="/2022/08/28/%E8%BE%93%E5%85%A5URL%E4%B9%8B%E5%90%8E%E4%BC%9A%E6%89%A7%E8%A1%8C%E4%BB%80%E4%B9%88/" title="输入URL之后会执行什么">输入URL之后会执行什么</a></span>
+    <span><a href="/2021/03/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="我的第一篇博客">我的第一篇博客</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
+<a href="/categories/%E5%AE%89%E5%85%A8/" title="In 安全">安全</a>
 </div>
 
-    <span><a href="/2021/09/01/OP-TEE%E4%B8%ADTA%E4%B8%8ECA%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3-------%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E7%AF%87/" title="Untitled">Untitled</a></span>
+    <span><a href="/2021/03/04/%E5%AE%89%E5%85%A8%E5%A4%9A%E6%96%B9%E8%AE%A1%E7%AE%97%E7%9A%84%E5%88%9D%E8%AE%A4%E8%AF%86/" title="安全多方计算的初认识">安全多方计算的初认识</a></span>
   </li>
 
       
   <li class="item">
     
 <div class="breadcrumb">
+<a href="/categories/ARM-TrustZone/" title="In ARM TrustZone">ARM TrustZone</a>
 </div>
 
-    <span><a href="/2021/03/06/3.6%E4%B8%BA%E4%BA%86%E8%82%9D%E5%91%A8%E6%8A%A5%E7%9A%84%E5%AD%A6%E4%B9%A0/" title="横向联邦学习">横向联邦学习</a></span>
+    <span><a href="/2021/08/27/3%20Modern%20Trusted%20Computing%20Hardware/" title="3 Modern Trusted Computing Hardware">3 Modern Trusted Computing Hardware</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Java/" title="In Java">Java</a>
+</div>
+
+    <span><a href="/2022/08/22/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" title="构造函数">构造函数</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ARM-TrustZone/" title="In ARM TrustZone">ARM TrustZone</a>
+</div>
+
+    <span><a href="/2021/09/01/OP-TEE%E4%B8%ADTA%E4%B8%8ECA%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3-------%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E7%AF%87/" title="OP-TEE中TA与CA执行流程详解-------软件架构篇">OP-TEE中TA与CA执行流程详解-------软件架构篇</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Java/" title="In Java">Java</a>
+</div>
+
+    <span><a href="/2022/08/21/%E5%A4%9A%E7%BB%A7%E6%89%BF%E9%97%AE%E9%A2%98/" title="多继承问题">多继承问题</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/C%E8%AF%AD%E8%A8%80/" title="In C语言">C语言</a>
+</div>
+
+    <span><a href="/2021/03/03/static/" title="C中static的运用">C中static的运用</a></span>
   </li>
 
   </ul>
@@ -426,7 +478,7 @@ Yume Shoka = hc‘s blog</title>
     <span class="with-love">
       <i class="ic i-sakura rotate"></i>
     </span>
-    <span class="author" itemprop="copyrightHolder">John Doe @ Yume Shoka</span>
+    <span class="author" itemprop="copyrightHolder">deku酱 @ Yume Shoka</span>
   </div>
   <div class="powered-by">
     Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
