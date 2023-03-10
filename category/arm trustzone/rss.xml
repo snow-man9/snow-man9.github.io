@@ -67,45 +67,44 @@
             <title>TZ学习组学习总结2021.8.9-2021.8.20</title>
             <link>http://example.com/2021/08/20/TZ%E5%AD%A6%E4%B9%A0%E7%BB%84%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%932021.8.9-2021.8.20/</link>
             <pubDate>Fri, 20 Aug 2021 18:43:25 +0800</pubDate>
-            <description><![CDATA[ &lt;p&gt;姓名：胡晨    &lt;/p&gt;
-&lt;h2 id=&#34;一、-本段时间的学习内容：&#34;&gt;&lt;a href=&#34;#一、-本段时间的学习内容：&#34; class=&#34;headerlink&#34; title=&#34;一、 本段时间的学习内容：&#34;&gt;&lt;/a&gt;一、 本段时间的学习内容：&lt;/h2&gt;&lt;h3 id=&#34;A-学习的详细内容1：成功搭建optee环境。&#34;&gt;&lt;a href=&#34;#A-学习的详细内容1：成功搭建optee环境。&#34; class=&#34;headerlink&#34; title=&#34;A. 学习的详细内容1：成功搭建optee环境。&#34;&gt;&lt;/a&gt;A. 学习的详细内容1：成功搭建optee环境。&lt;/h3&gt;&lt;p&gt;学习成果1：进度安排（各工作是否达到预期等）：达到。&lt;/p&gt;
-&lt;h3 id=&#34;B-学习的内容2：实践TA-CA的简单套路，了解了执行的流程，看了一些相关的视频（https-www-bilibili-com-video-BV1L4411N7gZ-p-1）和博客（https-icyshuai-blog-csdn-net-article-details-73716352）&#34;&gt;&lt;a href=&#34;#B-学习的内容2：实践TA-CA的简单套路，了解了执行的流程，看了一些相关的视频（https-www-bilibili-com-video-BV1L4411N7gZ-p-1）和博客（https-icyshuai-blog-csdn-net-article-details-73716352）&#34; class=&#34;headerlink&#34; title=&#34;B.学习的内容2：实践TA,CA的简单套路，了解了执行的流程，看了一些相关的视频（https://www.bilibili.com/video/BV1L4411N7gZ?p=1）和博客（https://icyshuai.blog.csdn.net/article/details/73716352）&#34;&gt;&lt;/a&gt;B.学习的内容2：实践TA,CA的简单套路，了解了执行的流程，看了一些相关的视频（&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL3ZpZGVvL0JWMUw0NDExTjdnWj9wPTElRUYlQkMlODklRTUlOTIlOEMlRTUlOEQlOUElRTUlQUUlQTIlRUYlQkMlODhodHRwczovL2ljeXNodWFpLmJsb2cuY3Nkbi5uZXQvYXJ0aWNsZS9kZXRhaWxzLzczNzE2MzUyJUVGJUJDJTg5&#34;&gt;https://www.bilibili.com/video/BV1L4411N7gZ?p=1）和博客（https://icyshuai.blog.csdn.net/article/details/73716352）&lt;/span&gt;&lt;/h3&gt;&lt;p&gt;学习成果2：进度安排（各工作是否达到预期等）：达到。&lt;/p&gt;
-&lt;h2 id=&#34;二、困难和解决方案：&#34;&gt;&lt;a href=&#34;#二、困难和解决方案：&#34; class=&#34;headerlink&#34; title=&#34;二、困难和解决方案：&#34;&gt;&lt;/a&gt;二、困难和解决方案：&lt;/h2&gt;&lt;p&gt;以下给出我总结的 optee 环境搭建方法（经过多次尝试，该方法可将时间缩短到两小时内，且必成功）：&lt;/p&gt;
-&lt;p&gt;1.首先，unbuntu选择18.04版本，这是一切的基础，想必大家都知道版本的重要。（其他版本可能或多或少有难以解决的问题）。给出下载网址：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL21pcnJvcnMuMTYzLmNvbS91YnVudHUtcmVsZWFzZXMvMTguMDQv&#34;&gt;http://mirrors.163.com/ubuntu-releases/18.04/&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;2.使用如下指令安装搭建时需要的工具和库（此时使用Ubuntu18.04不会有任何报错，但是其他版本会有包安装不了，从而会导致后面一些莫名其妙的错误。）：&lt;/p&gt;
+            <description><![CDATA[ &lt;p&gt;姓名：胡晨&lt;/p&gt;
+&lt;h2 id=&#34;一-本段时间的学习内容&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#一-本段时间的学习内容&#34;&gt;#&lt;/a&gt; 一、 本段时间的学习内容：&lt;/h2&gt;
+&lt;h3 id=&#34;a-学习的详细内容1成功搭建optee环境&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#a-学习的详细内容1成功搭建optee环境&#34;&gt;#&lt;/a&gt; A. 学习的详细内容 1：成功搭建 optee 环境。&lt;/h3&gt;
+&lt;p&gt;学习成果 1：进度安排（各工作是否达到预期等）：达到。&lt;/p&gt;
+&lt;h3 id=&#34;b学习的内容2实践taca的简单套路了解了执行的流程看了一些相关的视频httpswwwbilibilicomvideobv1l4411n7gzp1和博客httpsicyshuaiblogcsdnnetarticledetails73716352&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#b学习的内容2实践taca的简单套路了解了执行的流程看了一些相关的视频httpswwwbilibilicomvideobv1l4411n7gzp1和博客httpsicyshuaiblogcsdnnetarticledetails73716352&#34;&gt;#&lt;/a&gt; B. 学习的内容 2：实践 TA,CA 的简单套路，了解了执行的流程，看了一些相关的视频（&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL3ZpZGVvL0JWMUw0NDExTjdnWj9wPTElRUYlQkMlODklRTUlOTIlOEMlRTUlOEQlOUElRTUlQUUlQTIlRUYlQkMlODhodHRwczovL2ljeXNodWFpLmJsb2cuY3Nkbi5uZXQvYXJ0aWNsZS9kZXRhaWxzLzczNzE2MzUyJUVGJUJDJTg5&#34;&gt;https://www.bilibili.com/video/BV1L4411N7gZ?p=1）和博客（https://icyshuai.blog.csdn.net/article/details/73716352）&lt;/span&gt;&lt;/h3&gt;
+&lt;p&gt;学习成果 2：进度安排（各工作是否达到预期等）：达到。&lt;/p&gt;
+&lt;h2 id=&#34;二-困难和解决方案&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#二-困难和解决方案&#34;&gt;#&lt;/a&gt; 二、困难和解决方案：&lt;/h2&gt;
+&lt;p&gt;以下给出我总结的 optee 环境搭建方法（经过多次尝试，该方法可将时间缩短到两小时内，且必成功）：&lt;/p&gt;
+&lt;p&gt;1. 首先，unbuntu 选择 18.04 版本，这是一切的基础，想必大家都知道版本的重要。（其他版本可能或多或少有难以解决的问题）。给出下载网址：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cDovL21pcnJvcnMuMTYzLmNvbS91YnVudHUtcmVsZWFzZXMvMTguMDQv&#34;&gt;http://mirrors.163.com/ubuntu-releases/18.04/&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;2. 使用如下指令安装搭建时需要的工具和库（此时使用 Ubuntu18.04 不会有任何报错，但是其他版本会有包安装不了，从而会导致后面一些莫名其妙的错误。）：&lt;/p&gt;
 &lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install android-tools-adb android-tools-fastboot autoconf \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	automake bc bison build-essential cscope curl device-tree-compiler \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	expect flex ftp-upload gdisk iasl libattr1-dev libc6:i386 libcap-dev \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	libfdt-dev libftdi-dev libglib2.0-dev libhidapi-dev libncurses5-dev \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	libpixman-1-dev libssl-dev libstdc++6:i386 libtool libz1:i386 make \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	mtools netcat python-crypto python-serial python-wand unzip uuid-dev \&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;	xdg-utils xterm xz-utils zlib1g-dev&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;3.下载OP-TEE的源代码&lt;/p&gt;
-&lt;p&gt;此时直接从网盘中下载就可以了，千万不要自己同步，可能出现python版本不对等问题网盘链接如下：&lt;/p&gt;
+&lt;p&gt;3. 下载 OP-TEE 的源代码&lt;/p&gt;
+&lt;p&gt;此时直接从网盘中下载就可以了，千万不要自己同步，可能出现 python 版本不对等问题网盘链接如下：&lt;/p&gt;
 &lt;p&gt;&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9wYW4uYmFpZHUuY29tL3MvMVQ5dHNPblEzRWJ6OXdtN2liekJMcHc=&#34;&gt;https://pan.baidu.com/s/1T9tsOnQ3Ebz9wm7ibzBLpw&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;提取码: cd94&lt;/p&gt;
-&lt;p&gt;把压缩包复制到ubuntu中再解压就可以了（解压出来的文件层数过多，例如 /op-tee/OP-TEE/…. ,可以只留一个大文件目录方便操作）&lt;/p&gt;
-&lt;p&gt;5.获取toolchain&lt;/p&gt;
+&lt;p&gt;把压缩包复制到 ubuntu 中再解压就可以了（解压出来的文件层数过多，例如 /op-tee/OP-TEE/… , 可以只留一个大文件目录方便操作）&lt;/p&gt;
+&lt;p&gt;5. 获取 toolchain&lt;/p&gt;
 &lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ cd build&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;$ make -f qemu.mk all&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
-&lt;p&gt;6.启动qemu（仍然在build目录下）&lt;/p&gt;
+&lt;p&gt;6. 启动 qemu（仍然在 build 目录下）&lt;/p&gt;
 &lt;p&gt;如果你不信邪，直接执行下面命令：&lt;/p&gt;
 &lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ make -f qemu.mk run-only&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
 &lt;p&gt;此时必然会出现一个问题：&lt;/p&gt;
 &lt;p&gt;*** [/home/rhj0/open-tee/qemu/rules.mak:69：util/memfd.o] 错误 1&lt;/p&gt;
 &lt;p&gt;此时就需要修改文件里的代码。（可以直接在文件里搜索关键代码，方便寻找）&lt;/p&gt;
 &lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;6&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;7&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;8&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;9&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;&amp;#x2F;&amp;#x2F; qemu&amp;#x2F;util&amp;#x2F;memfd.c文件中的： &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;#ifdef CONFIG_MEMFD &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;#include &amp;lt;sys&amp;#x2F;memfd.h&amp;gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;#elif defined CONFIG_LINUX &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#x2F;&amp;#x2F; 改为： #if defined CONFIG_LINUX &amp;amp;&amp;amp; !defined CONFIG_MEMFD &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#x2F;&amp;#x2F; qemu&amp;#x2F;configure文件中的： &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;#include &amp;lt;sys&amp;#x2F;memfd.h&amp;gt; &lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;&amp;#x2F;&amp;#x2F; 改为： #include &amp;lt;sys&amp;#x2F;mman.h&amp;gt;&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
 &lt;p&gt;附上官方的更改链接（更改和上面一样）：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9naXQucWVtdS5vcmcvP3A9cWVtdS5naXQ7YT1jb21taXRkaWZmO2g9NzVlNWI3MGU2YjVkY2M0ZjIyMTk5OTJkN2NmZmE0NjJhYTQwNmFmMDtocD0yMDA3ODBhM2EzZWQwNjdkZmIyZTBkMjIxMGIwZWQwOWU3NDhiYTI2&#34;&gt;https://git.qemu.org/?p=qemu.git;a=commitdiff;h=75e5b70e6b5dcc4f2219992d7cffa462aa406af0;hp=200780a3a3ed067dfb2e0d2210b0ed09e748ba26&lt;/span&gt;&lt;/p&gt;
 &lt;p&gt;再次执行：&lt;/p&gt;
 &lt;figure class=&#34;highlight plain&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;$ make -f qemu.mk run-only&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-
 &lt;p&gt;就大功告成了。总耗时应该不超过两个小时，甚至网速快的话十几分钟就可以了。&lt;/p&gt;
 &lt;p&gt;（以上全是踩坑踩出来的经验和各个评论区大佬的解决方案，本人只是汇总找了条最简单的路）&lt;/p&gt;
 &lt;p&gt;对比别的教程把下载和同步源码改成了网盘下载，大大减少了不必要的麻烦。&lt;/p&gt;
-&lt;p&gt;最后感谢：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL3ZpZGVvL0JWMUw0NDExTjdnWj9mcm9tPXNlYXJjaCZhbXA7c2VpZD0zMjU2MTgxNDQ5MjU3MjEzODExJUVGJUJDJTg4KiolRTYlOEUlQTglRTglOEQlOTAlRTglQTclODIlRTclOUMlOEIqKiVFRiVCQyU4OQ==&#34;&gt;https://www.bilibili.com/video/BV1L4411N7gZ?from=search&amp;amp;seid=3256181449257213811（**推荐观看**）&lt;/span&gt;&lt;/p&gt;
-&lt;p&gt;和&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly9pY3lzaHVhaS5ibG9nLmNzZG4ubmV0L2FydGljbGUvZGV0YWlscy83MTQ5OTYxOQ==&#34;&gt;https://icyshuai.blog.csdn.net/article/details/71499619&lt;/span&gt;&lt;/p&gt;
+&lt;p&gt;最后感谢：&lt;span class=&#34;exturl&#34; data-url=&#34;aHR0cHM6Ly93d3cuYmlsaWJpbGkuY29tL3ZpZGVvL0JWMUw0NDExTjdnWj9mcm9tPXNlYXJjaCZhbXA7c2VpZD0zMjU2MTgxNDQ5MjU3MjEzODExJUVGJUJDJTg4&#34;&gt;https://www.bilibili.com/video/BV1L4411N7gZ?from=search&amp;amp;seid=3256181449257213811（&lt;/span&gt;&lt;strong&gt;推荐观看&lt;/strong&gt;）&lt;/p&gt;
+&lt;p&gt;和 https://icyshuai.blog.csdn.net/article/details/71499619&lt;/p&gt;
 &lt;p&gt;三、 下周预期安排&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;下期进度安排：&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;尽快熟悉TA和CA的用法&lt;/p&gt;
+&lt;p&gt;尽快熟悉 TA 和 CA 的用法&lt;/p&gt;
  ]]></description>
         </item>
     </channel>
