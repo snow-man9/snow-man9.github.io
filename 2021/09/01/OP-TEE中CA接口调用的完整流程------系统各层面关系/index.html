@@ -30,7 +30,7 @@
 
 
   <title>
-OP-TEE中CA接口调用的完整流程------系统各层面关系 - ARM TrustZone |
+OP-TEE中CA接口调用的完整流程--系统各层面关系 - ARM TrustZone |
 Yume Shoka = hc‘s blog</title>
 <meta name="generator" content="Hexo 5.4.0"></head>
 <body itemscope itemtype="http://schema.org/WebPage">
@@ -58,7 +58,7 @@ Yume Shoka = hc‘s blog</title>
         <div id="brand">
           <div class="pjax">
           
-  <h1 itemprop="name headline">OP-TEE中CA接口调用的完整流程------系统各层面关系
+  <h1 itemprop="name headline">OP-TEE中CA接口调用的完整流程--系统各层面关系
   </h1>
   
 <div class="meta">
@@ -100,12 +100,12 @@ Yume Shoka = hc‘s blog</title>
       </div>
       <div id="imgs" class="pjax">
         <ul>
-          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giclj9410cj20zk0m8h12.jpg"></li>
-          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gipewkhf1zj20zk0m81kx.jpg"></li>
-          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1giph4wqtg4j20zk0m8x6p.jpg"></li>
-          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicis3attqj20zk0m8k7l.jpg"></li>
-          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicitf0kl1j20zk0m87fe.jpg"></li>
-          <li class="item" data-background-image="https://tva2.sinaimg.cn/large/6833939bly1gicm0fdw5cj20zk0m8hdt.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giph47e9vtj20zk0m8x6l.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giciryrr3rj20zk0m8nhk.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1giclj9410cj20zk0m8h12.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicitf0kl1j20zk0m87fe.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicljgocqbj20zk0m8e81.jpg"></li>
+          <li class="item" data-background-image="https://tva3.sinaimg.cn/large/6833939bly1gicli3sbvtj20zk0m8x6p.jpg"></li>
         </ul>
       </div>
     </header>
@@ -151,32 +151,25 @@ Yume Shoka = hc‘s blog</title>
   <div class="body md" itemprop="articleBody">
     
 
-    <h1 id="op-tee中ca接口调用的完整流程-系统各层面关系"><a class="markdownIt-Anchor" href="#op-tee中ca接口调用的完整流程-系统各层面关系">#</a> OP-TEE 中 CA 接口调用的完整流程 ------ 系统各层面关系</h1>
-<p>二级厂商需要实现自有 feature，需要添加自己的 TA 和 CA 接口，当 CA 部分的接口需要提供给 app 层面调用的时候，一般做法是在 framwork 中建立特定的 service，在 service 中调用 CA 接口。同时也会建立对应的 client 部分，一般做法是在 framwork 中建立特定的 service，在 service 中调用 CA 接口，同时也会建立对应的 client 部分，client 部分与 service 部分通过 Binder 的方式进行同行来触发 CA 接口调用的操作。而对于 APP 层面，开发者会将 client 部分提供的接口以 JNI 的方式进行封装暴露给上层 APP 调用。</p>
-<p>当上层 APP 调用封装好的 JNI 接口后，CA 接口是如何通知特定的 TA 执行特定操作的呢？CA 与 TA 之间的数据是如何传递的呢？cortex 的状态是如何切换的呢？本文将详细讲解一次 CA 接口调用后功能实现的完整流程（本文不讨论 FIQ 和 IRQ 的情况，只讨论通过调用 SMC 指令调用到 TEE 的情况）。</p>
-<h2 id="1支持tee的系统各层面关系图"><a class="markdownIt-Anchor" href="#1支持tee的系统各层面关系图">#</a> 1. 支持 TEE 的系统各层面关系图</h2>
-<p>下图为层面结构图：</p>
+    <p>二级厂商需要实现自有feature，需要添加自己的TA 和CA接口，当CA部分的接口需要提供给app层面调用的时候，一般做法是在framwork中建立特定的service，在service中调用CA接口。同时也会建立对应的client部分，一般做法是在framwork中建立特定的service，在service中调用CA接口，同时也会建立对应的client部分，client部分与service部分通过Binder的方式进行同行来触发CA接口调用的操作。而对于APP层面，开发者会将client部分提供的接口以JNI的方式进行封装暴露给上层APP调用。</p>
+<p>当上层APP调用封装好的JNI接口后，CA接口是如何通知特定的TA执行特定操作的呢？CA与TA之间的数据是如何传递的呢？cortex的状态是如何切换的呢？本文将详细讲解一次CA接口调用后功能实现的完整流程（本文不讨论FIQ和IRQ的情况，只讨论通过调用SMC指令调用到TEE的情况）。</p>
+<h2 id="1-支持TEE的系统各层面关系图"><a href="#1-支持TEE的系统各层面关系图" class="headerlink" title="1.支持TEE的系统各层面关系图"></a>1.支持TEE的系统各层面关系图</h2><p>下图为层面结构图：</p>
 <p><img data-src="https://i.imgtg.com/2023/03/10/Y86qU.png" alt="img"></p>
-<p>当 CA 接口处于 userspace 层面，整个调用过程需要经过 kernel space 层面， linux driver 层面， Monitor 态中断处理层面， TEE OS kernel 层面， TEE 的 userspace 层面（TA）。</p>
-<h2 id="2userspace到kernelspace"><a class="markdownIt-Anchor" href="#2userspace到kernelspace">#</a> 2.userspace 到 kernelspace</h2>
-<p>在 userspace 层面调用 CA 接口后会触发 system call 操作，系统调用会将 Lixnux 陷入内核态，此时系统处于 kernel space，然后根据传入的参数，找到对应的 TEE driver，整个过程大致如下：</p>
+<p>　当CA接口处于userspace层面，整个调用过程需要经过kernel space层面， linux driver层面， Monitor态中断处理层面， TEE OS kernel层面， TEE的userspace层面（TA）。</p>
+<h2 id="2-userspace到kernelspace"><a href="#2-userspace到kernelspace" class="headerlink" title="2.userspace到kernelspace"></a>2.userspace到kernelspace</h2><p>在userspace层面调用CA接口后会触发system call操作，系统调用会将Lixnux陷入内核态，此时系统处于kernel space，然后根据传入的参数，找到对应的TEE driver，整个过程大致如下：</p>
 <p><img data-src="https://i.imgtg.com/2023/03/10/Y88rY.png" alt="img"></p>
-<p>关于该部分更加详细的内容，例如：软中断如何在 kernel 中注册的，系统调用的定义等等可查找系统调用（systemcall）和驱动的相关资料进行了解。</p>
-<h2 id="3tee-driver到monitor态"><a class="markdownIt-Anchor" href="#3tee-driver到monitor态">#</a> 3.TEE driver 到 monitor 态</h2>
-<p>在 TEE 的 driver 中，最终会调用 SMC 这条汇编指令来实现与 OP-TEE 的沟通，当调用 SMC 汇编指令之后，会触发 SMC 软中断，改软中断的处理在 Cortex 的 Monitor 态中进行，该软中断会根据发送指令是属于安全侧请求哈市非安全侧的请求来控制是将 cortex 切换到 secure world 态还是 non-secure world 态。该切换动作在 ATF 的 SMC 中断处理函数中被实现。</p>
-<h2 id="4tee-kernel-space到tee-userspace"><a class="markdownIt-Anchor" href="#4tee-kernel-space到tee-userspace">#</a> 4.TEE kernel space 到 TEE userspace</h2>
-<p>当 SMC 中断处理函数完成了将 cortex 的状态切换到 secure world 态以及相关参数的拷贝动作之后，TEE OS 将接管剩下的操作。TEE OS 首先将会获取从 CA 端传递过来的数据，然后解析出数据中写入的 TA 的 UUID，然后查找对应的 TA image 是否被挂载到了 TEE OS 中。</p>
-<p>如果没有 TEE OS 将会与常驻在 linux 中的 tee_supplicant 进程通信，从文件系统中获取到 TA image 文件，并传递給 TEE OS，然后加载该 TA image。处理完整之后，TEE OS 会切换到 TEE userspace 态，并将 CA 传递过来的其他参数传给具体的 TA process，TA process 获取到参数后，首先需要解除出参数中的 commond ID 值，根据具体的 command ID 值来做具体的操作。</p>
-<p>当然 TEE OS 在加载 TA image 的时候会有电子验签操作来验证 TA image 的合法性。上述步骤的大致流程图如下：<br>
-<img data-src="https://i.imgtg.com/2023/03/10/Y8XQv.png" alt="img"></p>
-<p>由于一次完整的 CA 调用过程需要做一次调用执行 initContext, Opensession, InvokeCommand, close session, FinalizeContext 操作，所以上图只是大致流程，关于详细部分将会在后期章节中节后代码逐步讲解。</p>
-<h2 id="5gp规定的c端接口"><a class="markdownIt-Anchor" href="#5gp规定的c端接口">#</a> 5.GP 规定的 C 端接口</h2>
-<p>在 GP 中规定的 CA 端接口较少，主要的是五个接口，分别如下：</p>
-<p>TEEC_InitializeContext: 初始化 TEE context，完成 open tee driver，建立与 TEE 之间的 context</p>
-<p>TEEC_OpenSession: 建立 CA 与 TA 之间的会话窗口</p>
-<p>TEEC_InvokeCommand: 想 TA 发送执行请求来执行具体的操作</p>
-<p>TEEC_CloseSession: 关闭 CA 与 TA 之间的会话窗口</p>
-<p>TEEC_FinalizeContext: 清空建立的 contex</p>
+<p>关于该部分更加详细的内容，例如：软中断如何在kernel中注册的，系统调用的定义等等可查找系统调用（systemcall）和驱动的相关资料进行了解。</p>
+<h2 id="3-TEE-driver到monitor态"><a href="#3-TEE-driver到monitor态" class="headerlink" title="3.TEE driver到monitor态"></a>3.TEE driver到monitor态</h2><p>在TEE的driver中，最终会调用SMC这条汇编指令来实现与OP-TEE的沟通，当调用SMC汇编指令之后，会触发SMC软中断，改软中断的处理在Cortex的Monitor态中进行，该软中断会根据发送指令是属于安全侧请求哈市非安全侧的请求来控制是将cortex切换到secure world态还是non-secure world态。该切换动作在ATF的SMC中断处理函数中被实现。</p>
+<h2 id="4-TEE-kernel-space到TEE-userspace"><a href="#4-TEE-kernel-space到TEE-userspace" class="headerlink" title="4.TEE kernel space到TEE userspace"></a>4.TEE kernel space到TEE userspace</h2><p>当SMC中断处理函数完成了将cortex的状态切换到secure world态以及相关参数的拷贝动作之后，TEE OS将接管剩下的操作。TEE OS首先将会获取从CA端传递过来的数据，然后解析出数据中写入的TA的UUID，然后查找对应的TA image是否被挂载到了 TEE OS中。</p>
+<p>　　如果没有TEE OS将会与常驻在linux中的tee_supplicant进程通信，从文件系统中获取到TA image文件，并传递給TEE OS，然后加载该TA image。处理完整之后，TEE OS会切换到TEE userspace态，并将CA传递过来的其他参数传给具体的TA process，TA process获取到参数后，首先需要解除出参数中的commond ID值，根据具体的command ID值来做具体的操作。</p>
+<p>当然TEE OS在加载TA image的时候会有电子验签操作来验证TA image的合法性。上述步骤的大致流程图如下：<br><img data-src="https://i.imgtg.com/2023/03/10/Y8XQv.png" alt="img"></p>
+<p>由于一次完整的CA调用过程需要做一次调用执行initContext, Opensession, InvokeCommand, close session, FinalizeContext操作，所以上图只是大致流程，关于详细部分将会在后期章节中节后代码逐步讲解。</p>
+<h2 id="5-GP规定的C端接口"><a href="#5-GP规定的C端接口" class="headerlink" title="5.GP规定的C端接口"></a>5.GP规定的C端接口</h2><p>在GP中规定的CA端接口较少，主要的是五个接口，分别如下：</p>
+<p>TEEC_InitializeContext: 初始化TEE context，完成open tee driver，建立与TEE之间的context</p>
+<p>TEEC_OpenSession: 建立CA与TA之间的会话窗口</p>
+<p>TEEC_InvokeCommand: 想TA发送执行请求来执行具体的操作</p>
+<p>TEEC_CloseSession: 关闭CA与TA之间的会话窗口</p>
+<p>TEEC_FinalizeContext:清空建立的contex</p>
 <hr>
 <p>转载自：<span class="exturl" data-url="aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NodWFpZmVuZ3l1bi9hcnRpY2xlL2RldGFpbHMvNzE2OTczNzE=">https://blog.csdn.net/shuaifengyun/article/details/71697371</span></p>
 <p>自己差不多抄了一遍，大概流程看了一下，还是有些细节不太懂。很多操作没有见过，也不知道为什么要这样做。</p>
@@ -191,7 +184,15 @@ Yume Shoka = hc‘s blog</title>
       <i class="ic i-calendar-check"></i>
     </span>
     <span class="text">Edited on</span>
-    <time title="Modified: 2023-03-10 10:20:50" itemprop="dateModified" datetime="2023-03-10T10:20:50+08:00">2023-03-10</time>
+    <time title="Modified: 2023-03-10 11:18:16" itemprop="dateModified" datetime="2023-03-10T11:18:16+08:00">2023-03-10</time>
+  </span>
+  <span id="2021/09/01/OP-TEE中CA接口调用的完整流程------系统各层面关系/" class="item leancloud_visitors" data-flag-title="OP-TEE中CA接口调用的完整流程--系统各层面关系" title="Views">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">Views</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">times</span>
   </span>
 </div>
 
@@ -227,7 +228,7 @@ Yume Shoka = hc‘s blog</title>
   </li>
   <li class="link">
     <strong>Post link: </strong>
-    <a href="http://example.com/2021/09/01/OP-TEE%E4%B8%ADCA%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B------%E7%B3%BB%E7%BB%9F%E5%90%84%E5%B1%82%E9%9D%A2%E5%85%B3%E7%B3%BB/" title="OP-TEE中CA接口调用的完整流程------系统各层面关系">http://example.com/2021/09/01/OP-TEE中CA接口调用的完整流程------系统各层面关系/</a>
+    <a href="http://example.com/2021/09/01/OP-TEE%E4%B8%ADCA%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B------%E7%B3%BB%E7%BB%9F%E5%90%84%E5%B1%82%E9%9D%A2%E5%85%B3%E7%B3%BB/" title="OP-TEE中CA接口调用的完整流程--系统各层面关系">http://example.com/2021/09/01/OP-TEE中CA接口调用的完整流程------系统各层面关系/</a>
   </li>
   <li class="license">
     <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
@@ -246,7 +247,7 @@ Yume Shoka = hc‘s blog</title>
     <div class="item left">
       
 
-  <a href="/2021/08/27/3%20Modern%20Trusted%20Computing%20Hardware/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gicitf0kl1j20zk0m87fe.jpg" title="3 Modern Trusted Computing Hardware">
+  <a href="/2021/08/27/3%20Modern%20Trusted%20Computing%20Hardware/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipeun65urj20zk0m81ii.jpg" title="3 Modern Trusted Computing Hardware">
   <span class="type">Previous Post</span>
   <span class="category"><i class="ic i-flag"></i> ARM TrustZone</span>
   <h3>3 Modern Trusted Computing Hardware</h3>
@@ -256,10 +257,10 @@ Yume Shoka = hc‘s blog</title>
     <div class="item right">
       
 
-  <a href="/2021/09/01/OP-TEE%E4%B8%ADTA%E4%B8%8ECA%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3-------%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E7%AF%87/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva2.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1gipesng5oej20zk0m87d4.jpg" title="OP-TEE中TA与CA执行流程详解-------软件架构篇">
+  <a href="/2021/09/01/OP-TEE%E4%B8%ADTA%E4%B8%8ECA%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3-------%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E7%AF%87/" itemprop="url" rel="next" data-background-image="https:&#x2F;&#x2F;tva3.sinaimg.cn&#x2F;mw690&#x2F;6833939bly1giclh3brzpj20zk0m8ann.jpg" title="OP-TEE中TA与CA执行流程详解--软件架构篇">
   <span class="type">Next Post</span>
   <span class="category"><i class="ic i-flag"></i> ARM TrustZone</span>
-  <h3>OP-TEE中TA与CA执行流程详解-------软件架构篇</h3>
+  <h3>OP-TEE中TA与CA执行流程详解--软件架构篇</h3>
   </a>
 
     </div>
@@ -278,11 +279,11 @@ Yume Shoka = hc‘s blog</title>
   <div class="panels">
     <div class="inner">
       <div class="contents panel pjax" data-title="Contents">
-          <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#op-tee%E4%B8%ADca%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B-%E7%B3%BB%E7%BB%9F%E5%90%84%E5%B1%82%E9%9D%A2%E5%85%B3%E7%B3%BB"><span class="toc-number">1.</span> <span class="toc-text"> OP-TEE 中 CA 接口调用的完整流程 ------ 系统各层面关系</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E6%94%AF%E6%8C%81tee%E7%9A%84%E7%B3%BB%E7%BB%9F%E5%90%84%E5%B1%82%E9%9D%A2%E5%85%B3%E7%B3%BB%E5%9B%BE"><span class="toc-number">1.1.</span> <span class="toc-text"> 1. 支持 TEE 的系统各层面关系图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2userspace%E5%88%B0kernelspace"><span class="toc-number">1.2.</span> <span class="toc-text"> 2.userspace 到 kernelspace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3tee-driver%E5%88%B0monitor%E6%80%81"><span class="toc-number">1.3.</span> <span class="toc-text"> 3.TEE driver 到 monitor 态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4tee-kernel-space%E5%88%B0tee-userspace"><span class="toc-number">1.4.</span> <span class="toc-text"> 4.TEE kernel space 到 TEE userspace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5gp%E8%A7%84%E5%AE%9A%E7%9A%84c%E7%AB%AF%E6%8E%A5%E5%8F%A3"><span class="toc-number">1.5.</span> <span class="toc-text"> 5.GP 规定的 C 端接口</span></a></li></ol></li></ol>
+          <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%94%AF%E6%8C%81TEE%E7%9A%84%E7%B3%BB%E7%BB%9F%E5%90%84%E5%B1%82%E9%9D%A2%E5%85%B3%E7%B3%BB%E5%9B%BE"><span class="toc-number">1.</span> <span class="toc-text">1.支持TEE的系统各层面关系图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-userspace%E5%88%B0kernelspace"><span class="toc-number">2.</span> <span class="toc-text">2.userspace到kernelspace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-TEE-driver%E5%88%B0monitor%E6%80%81"><span class="toc-number">3.</span> <span class="toc-text">3.TEE driver到monitor态</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-TEE-kernel-space%E5%88%B0TEE-userspace"><span class="toc-number">4.</span> <span class="toc-text">4.TEE kernel space到TEE userspace</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-GP%E8%A7%84%E5%AE%9A%E7%9A%84C%E7%AB%AF%E6%8E%A5%E5%8F%A3"><span class="toc-number">5.</span> <span class="toc-text">5.GP规定的C端接口</span></a></li></ol>
       </div>
       <div class="related panel pjax" data-title="Related">
         <ul>
-          <li><a href="/2021/08/20/TZ%E5%AD%A6%E4%B9%A0%E7%BB%84%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%932021.8.9-2021.8.20/" rel="bookmark" title="TZ学习组学习总结2021.8.9-2021.8.20">TZ学习组学习总结2021.8.9-2021.8.20</a></li><li><a href="/2021/08/27/3%20Modern%20Trusted%20Computing%20Hardware/" rel="bookmark" title="3 Modern Trusted Computing Hardware">3 Modern Trusted Computing Hardware</a></li><li class="active"><a href="/2021/09/01/OP-TEE%E4%B8%ADCA%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B------%E7%B3%BB%E7%BB%9F%E5%90%84%E5%B1%82%E9%9D%A2%E5%85%B3%E7%B3%BB/" rel="bookmark" title="OP-TEE中CA接口调用的完整流程------系统各层面关系">OP-TEE中CA接口调用的完整流程------系统各层面关系</a></li><li><a href="/2021/09/01/OP-TEE%E4%B8%ADTA%E4%B8%8ECA%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3-------%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E7%AF%87/" rel="bookmark" title="OP-TEE中TA与CA执行流程详解-------软件架构篇">OP-TEE中TA与CA执行流程详解-------软件架构篇</a></li>
+          <li><a href="/2021/08/20/TZ%E5%AD%A6%E4%B9%A0%E7%BB%84%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%932021.8.9-2021.8.20/" rel="bookmark" title="TZ学习组学习总结2021.8.9-2021.8.20">TZ学习组学习总结2021.8.9-2021.8.20</a></li><li><a href="/2021/08/27/3%20Modern%20Trusted%20Computing%20Hardware/" rel="bookmark" title="3 Modern Trusted Computing Hardware">3 Modern Trusted Computing Hardware</a></li><li class="active"><a href="/2021/09/01/OP-TEE%E4%B8%ADCA%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B------%E7%B3%BB%E7%BB%9F%E5%90%84%E5%B1%82%E9%9D%A2%E5%85%B3%E7%B3%BB/" rel="bookmark" title="OP-TEE中CA接口调用的完整流程--系统各层面关系">OP-TEE中CA接口调用的完整流程--系统各层面关系</a></li><li><a href="/2021/09/01/OP-TEE%E4%B8%ADTA%E4%B8%8ECA%E6%89%A7%E8%A1%8C%E6%B5%81%E7%A8%8B%E8%AF%A6%E8%A7%A3-------%E8%BD%AF%E4%BB%B6%E6%9E%B6%E6%9E%84%E7%AF%87/" rel="bookmark" title="OP-TEE中TA与CA执行流程详解--软件架构篇">OP-TEE中TA与CA执行流程详解--软件架构篇</a></li>
         </ul>
       </div>
       <div class="overview panel" data-title="Overview">
@@ -389,56 +390,7 @@ Yume Shoka = hc‘s blog</title>
 <a href="/categories/Java/" title="In Java">Java</a>
 </div>
 
-    <span><a href="/2022/08/27/%E5%B9%B6%E5%8F%91%E7%BC%96%E7%A8%8B%E5%85%A5%E9%97%A8%EF%BC%881%EF%BC%89%EF%BC%9A%E5%8F%AF%E8%A7%81%E6%80%A7%E3%80%81%E5%8E%9F%E5%AD%90%E6%80%A7%E5%92%8C%E6%9C%89%E5%BA%8F%E6%80%A7/" title="并发编程入门（1）：可见性、原子性和有序性">并发编程入门（1）：可见性、原子性和有序性</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-</div>
-
-    <span><a href="/2021/03/02/hello-world/" title="Hello World">Hello World</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E7%BD%91%E7%BB%9C/" title="In 网络">网络</a>
-</div>
-
-    <span><a href="/2022/08/28/%E8%BE%93%E5%85%A5URL%E4%B9%8B%E5%90%8E%E4%BC%9A%E6%89%A7%E8%A1%8C%E4%BB%80%E4%B9%88/" title="输入URL之后会执行什么">输入URL之后会执行什么</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E6%84%9F%E6%83%B3/" title="In 感想">感想</a>
-</div>
-
-    <span><a href="/2021/03/03/3.3%E7%9A%84%E6%84%9F%E6%83%B3/" title="无题">无题</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E6%84%9F%E6%83%B3/" title="In 感想">感想</a>
-</div>
-
-    <span><a href="/2021/03/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="我的第一篇博客">我的第一篇博客</a></span>
-  </li>
-
-      
-  <li class="item">
-    
-<div class="breadcrumb">
-<a href="/categories/%E5%AE%89%E5%85%A8/" title="In 安全">安全</a>
-</div>
-
-    <span><a href="/2021/03/04/%E5%AE%89%E5%85%A8%E5%A4%9A%E6%96%B9%E8%AE%A1%E7%AE%97%E7%9A%84%E5%88%9D%E8%AE%A4%E8%AF%86/" title="安全多方计算的初认识">安全多方计算的初认识</a></span>
+    <span><a href="/2022/08/21/%E5%A4%9A%E7%BB%A7%E6%89%BF%E9%97%AE%E9%A2%98/" title="多继承问题">多继承问题</a></span>
   </li>
 
       
@@ -448,7 +400,16 @@ Yume Shoka = hc‘s blog</title>
 <a href="/categories/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0/" title="In 联邦学习">联邦学习</a>
 </div>
 
-    <span><a href="/2021/03/07/%E7%BA%B5%E5%90%91%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0/" title="纵向联邦学习">纵向联邦学习</a></span>
+    <span><a href="/2021/03/06/3.6%E4%B8%BA%E4%BA%86%E8%82%9D%E5%91%A8%E6%8A%A5%E7%9A%84%E5%AD%A6%E4%B9%A0/" title="横向联邦学习">横向联邦学习</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2021/03/02/hello-world/" title="Hello World">Hello World</a></span>
   </li>
 
       
@@ -470,7 +431,37 @@ Yume Shoka = hc‘s blog</title>
 <a href="/categories/Java/" title="In Java">Java</a>
 </div>
 
-    <span><a href="/2022/08/28/Spring%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E6%9C%89%E5%87%A0%E7%A7%8D%EF%BC%9F%E5%90%84%E8%87%AA%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E7%BC%BA%E7%82%B9%EF%BC%9F/" title="Spring依赖注入有几种？各自有什么优缺点？">Spring依赖注入有几种？各自有什么优缺点？</a></span>
+    <span><a href="/2022/08/22/%E7%B1%BB%E5%8F%98%E9%87%8F%E3%80%81%E6%88%90%E5%91%98%E5%8F%98%E9%87%8F%E5%92%8C%E5%B1%80%E9%83%A8%E5%8F%98%E9%87%8F/" title="类变量，成员变量和局部变量">类变量，成员变量和局部变量</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E7%BD%91%E7%BB%9C/" title="In 网络">网络</a>
+</div>
+
+    <span><a href="/2022/08/28/%E8%BE%93%E5%85%A5URL%E4%B9%8B%E5%90%8E%E4%BC%9A%E6%89%A7%E8%A1%8C%E4%BB%80%E4%B9%88/" title="输入URL之后会执行什么">输入URL之后会执行什么</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/C%E8%AF%AD%E8%A8%80/" title="In C语言">C语言</a>
+</div>
+
+    <span><a href="/2021/03/03/static/" title="C中static的运用">C中static的运用</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E5%AE%89%E5%85%A8/" title="In 安全">安全</a>
+</div>
+
+    <span><a href="/2021/03/04/%E5%AE%89%E5%85%A8%E5%A4%9A%E6%96%B9%E8%AE%A1%E7%AE%97%E7%9A%84%E5%88%9D%E8%AE%A4%E8%AF%86/" title="安全多方计算的初认识">安全多方计算的初认识</a></span>
   </li>
 
       
@@ -480,7 +471,17 @@ Yume Shoka = hc‘s blog</title>
 <a href="/categories/ARM-TrustZone/" title="In ARM TrustZone">ARM TrustZone</a>
 </div>
 
-    <span><a href="/2021/08/20/TZ%E5%AD%A6%E4%B9%A0%E7%BB%84%E5%AD%A6%E4%B9%A0%E6%80%BB%E7%BB%932021.8.9-2021.8.20/" title="TZ学习组学习总结2021.8.9-2021.8.20">TZ学习组学习总结2021.8.9-2021.8.20</a></span>
+    <span><a href="/2021/08/27/3%20Modern%20Trusted%20Computing%20Hardware/" title="3 Modern Trusted Computing Hardware">3 Modern Trusted Computing Hardware</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%84%9F%E6%83%B3/" title="In 感想">感想</a>
+</div>
+
+    <span><a href="/2021/03/05/3.4%E7%9A%84%E6%84%9F%E6%83%B3/" title="怎么说呢，有点沉不下心来">怎么说呢，有点沉不下心来</a></span>
   </li>
 
   </ul>
