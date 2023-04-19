@@ -1,0 +1,543 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#FFF">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="icon" type="image/ico" sizes="32x32" href="/images/favicon.ico">
+  <meta http-equiv="Cache-Control" content="no-transform">
+  <meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+<link rel="alternate" type="application/rss+xml" title="hc‘s blog" href="http://example.com/rss.xml" />
+<link rel="alternate" type="application/atom+xml" title="hc‘s blog" href="http://example.com/atom.xml" />
+<link rel="alternate" type="application/json" title="hc‘s blog" href="http://example.com/feed.json" />
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Mulish:300,300italic,400,400italic,700,700italic%7CFredericka%20the%20Great:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20JP:300,300italic,400,400italic,700,700italic%7CNoto%20Serif%20SC:300,300italic,400,400italic,700,700italic%7CInconsolata:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="/css/app.css?v=0.2.5">
+
+  
+
+<link rel="canonical" href="http://example.com/2023/04/19/4.18%E7%AE%97%E6%B3%95%E8%AE%B0%E5%BD%95/">
+
+
+
+  <title>
+4.18算法记录 - 2023秋招学习记录 - 算法 |
+Yume Shoka = hc‘s blog</title>
+<meta name="generator" content="Hexo 5.4.0"></head>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div id="loading">
+    <div class="cat">
+      <div class="body"></div>
+      <div class="head">
+        <div class="face"></div>
+      </div>
+      <div class="foot">
+        <div class="tummy-end"></div>
+        <div class="bottom"></div>
+        <div class="legs left"></div>
+        <div class="legs right"></div>
+      </div>
+      <div class="paw">
+        <div class="hands left"></div>
+        <div class="hands right"></div>
+      </div>
+    </div>
+  </div>
+  <div id="container">
+    <header id="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="inner">
+        <div id="brand">
+          <div class="pjax">
+          
+  <h1 itemprop="name headline">4.18算法记录
+  </h1>
+  
+<div class="meta">
+  <span class="item" title="Created: 2023-04-19 09:56:03">
+    <span class="icon">
+      <i class="ic i-calendar"></i>
+    </span>
+    <span class="text">Posted on</span>
+    <time itemprop="dateCreated datePublished" datetime="2023-04-19T09:56:03+08:00">2023-04-19</time>
+  </span>
+</div>
+
+
+          </div>
+        </div>
+        <nav id="nav">
+  <div class="inner">
+    <div class="toggle">
+      <div class="lines" aria-label="Toggle navigation bar">
+        <span class="line"></span>
+        <span class="line"></span>
+        <span class="line"></span>
+      </div>
+    </div>
+    <ul class="menu">
+      <li class="item title"><a href="/" rel="start">Yume Shoka</a></li>
+    </ul>
+    <ul class="right">
+      <li class="item theme">
+        <i class="ic i-sun"></i>
+      </li>
+      <li class="item search">
+        <i class="ic i-search"></i>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+      </div>
+      <div id="imgs" class="pjax">
+        <ul>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/10/YwXQI.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/10/YwSrj.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/10/Yw3nF.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/10/Yw0Qp.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/10/YwuCD.jpg"></li>
+          <li class="item" data-background-image="https://i.imgtg.com/2023/03/10/YwQqx.jpg"></li>
+        </ul>
+      </div>
+    </header>
+    <div id="waves">
+      <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+        <defs>
+          <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+        </defs>
+        <g class="parallax">
+          <use xlink:href="#gentle-wave" x="48" y="0" />
+          <use xlink:href="#gentle-wave" x="48" y="3" />
+          <use xlink:href="#gentle-wave" x="48" y="5" />
+          <use xlink:href="#gentle-wave" x="48" y="7" />
+        </g>
+      </svg>
+    </div>
+    <main>
+      <div class="inner">
+        <div id="main" class="pjax">
+          
+  <div class="article wrap">
+    
+<div class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+<i class="ic i-home"></i>
+<span><a href="/">Home</a></span><i class="ic i-angle-right"></i>
+<span  itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/%E7%AE%97%E6%B3%95/" itemprop="item" rel="index" title="In 算法"><span itemprop="name">算法</span></a>
+<meta itemprop="position" content="1" /></span>
+<i class="ic i-angle-right"></i>
+<span  class="current" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem"><a href="/categories/2023%E7%A7%8B%E6%8B%9B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" itemprop="item" rel="index" title="In 2023秋招学习记录"><span itemprop="name">2023秋招学习记录</span></a>
+<meta itemprop="position" content="2" /></span>
+</div>
+
+    <article itemscope itemtype="http://schema.org/Article" class="post block" lang="en">
+  <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/19/4.18%E7%AE%97%E6%B3%95%E8%AE%B0%E5%BD%95/">
+
+  <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="image" content="/images/avatar.jpg">
+    <meta itemprop="name" content="deku酱">
+    <meta itemprop="description" content=", ">
+  </span>
+
+  <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="hc‘s blog">
+  </span>
+
+  <div class="body md" itemprop="articleBody">
+    
+
+    <p>（开始为了秋招做一点记录吧，不然就摆了）</p>
+<p>1.<span class="exturl" data-url="aHR0cHM6Ly9sZWV0Y29kZS5jbi9wcm9ibGVtcy9yZW1vdmUtbGlua2VkLWxpc3QtZWxlbWVudHMv"> 移除链表元素</span></p>
+<p>​	给你一个链表的头节点  <code>head</code>  和一个整数  <code>val</code>  ，请你删除链表中所有满足  <code>Node.val == val</code>  的节点，并返回 <strong>新的头节点</strong> 。</p>
+<p><a target="_blank" rel="noopener" href="https://imgtg.com/image/uicAL"><img data-src="https://i.imgtg.com/2023/04/18/uicAL.png" alt="uicAL.png"></a></p>
+<p><strong>代码如下：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> ListNode <span class="title">removeElements</span><span class="params">(ListNode head, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        ListNode dummyNode = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">        dummyNode.next = head;</span><br><span class="line">        ListNode cur = head;</span><br><span class="line">        ListNode pre = dummyNode;</span><br><span class="line">        <span class="keyword">while</span>(cur != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span>(cur.val == val) &#123;</span><br><span class="line">                pre.next = cur.next;</span><br><span class="line">                cur = pre.next;</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                pre = pre.next;</span><br><span class="line">                cur = cur.next;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> dummyNode.next;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment">//思考：</span></span><br><span class="line"><span class="comment">//题目不算难，但还是小费了点时间，因为对情况的模拟不到位，总是差不多就写了。下次一定要在脑子里想清楚在动笔！！</span></span><br></pre></td></tr></table></figure>
+<p>2.<span class="exturl" data-url="aHR0cHM6Ly9sZWV0Y29kZS5jbi9wcm9ibGVtcy9kZXNpZ24tbGlua2VkLWxpc3Qv"> 设计链表</span></p>
+<p>你可以选择使用单链表或者双链表，设计并实现自己的链表。</p>
+<p>单链表中的节点应该具备两个属性：val 和 next 。val 是当前节点的值，next 是指向下一个节点的指针 / 引用。</p>
+<p>如果是双向链表，则还需要属性 prev 以指示链表中的上一个节点。假设链表中的所有节点下标从 0 开始。</p>
+<p>实现 MyLinkedList 类：</p>
+<ul>
+<li>MyLinkedList () 初始化 MyLinkedList 对象。</li>
+<li>int get (int index) 获取链表中下标为 index 的节点的值。如果下标无效，则返回 -1 。</li>
+<li>void addAtHead (int val) 将一个值为 val 的节点插入到链表中第一个元素之前。在插入完成后，新节点会成为链表的第一个节点。</li>
+<li>void addAtTail (int val) 将一个值为 val 的节点追加到链表中作为链表的最后一个元素。</li>
+<li>void addAtIndex (int index, int val) 将一个值为 val 的节点插入到链表中下标为 index 的节点之前。如果 index 等于链表的长度，那么该节点会被追加到链表的末尾。如果 index 比长度更大，该节点将 不会插入 到链表中。</li>
+<li>void deleteAtIndex (int index) 如果下标有效，则删除链表中下标为 index 的节点。</li>
+</ul>
+<p><strong>示例：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">输入</span><br><span class="line">[<span class="string">&quot;MyLinkedList&quot;</span>, <span class="string">&quot;addAtHead&quot;</span>, <span class="string">&quot;addAtTail&quot;</span>, <span class="string">&quot;addAtIndex&quot;</span>, <span class="string">&quot;get&quot;</span>, <span class="string">&quot;deleteAtIndex&quot;</span>, <span class="string">&quot;get&quot;</span>]</span><br><span class="line">[[], [<span class="number">1</span>], [<span class="number">3</span>], [<span class="number">1</span>, <span class="number">2</span>], [<span class="number">1</span>], [<span class="number">1</span>], [<span class="number">1</span>]]</span><br><span class="line">输出</span><br><span class="line">[<span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>, <span class="number">2</span>, <span class="keyword">null</span>, <span class="number">3</span>]</span><br><span class="line"></span><br><span class="line">解释</span><br><span class="line">MyLinkedList myLinkedList = <span class="keyword">new</span> MyLinkedList();</span><br><span class="line">myLinkedList.addAtHead(<span class="number">1</span>);</span><br><span class="line">myLinkedList.addAtTail(<span class="number">3</span>);</span><br><span class="line">myLinkedList.addAtIndex(<span class="number">1</span>, <span class="number">2</span>);    <span class="comment">// 链表变为 1-&gt;2-&gt;3</span></span><br><span class="line">myLinkedList.get(<span class="number">1</span>);              <span class="comment">// 返回 2</span></span><br><span class="line">myLinkedList.deleteAtIndex(<span class="number">1</span>);    <span class="comment">// 现在，链表变为 1-&gt;3</span></span><br><span class="line">myLinkedList.get(<span class="number">1</span>);              <span class="comment">// 返回 3</span></span><br></pre></td></tr></table></figure>
+<p><strong>代码如下：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//class ListNode &#123;</span></span><br><span class="line"><span class="comment">//    int val;</span></span><br><span class="line"><span class="comment">//    ListNode next;</span></span><br><span class="line"><span class="comment">//  ListNode()&#123;&#125;</span></span><br><span class="line"><span class="comment">//    ListNode(int val) &#123;</span></span><br><span class="line"><span class="comment">//       this.val=val;</span></span><br><span class="line"><span class="comment">//   &#125;</span></span><br><span class="line"><span class="comment">//&#125;</span></span><br><span class="line"><span class="comment">//这个可以不写</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">MyLinkedList</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">int</span> size;</span><br><span class="line"></span><br><span class="line">    ListNode head;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyLinkedList</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        size = <span class="number">0</span>;</span><br><span class="line">        head = <span class="keyword">new</span> ListNode(<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">get</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(index &lt; <span class="number">0</span> || index &gt;= size) &#123;</span><br><span class="line">            <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ListNode node = head;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= index; i++) &#123;</span><br><span class="line">            node = node.next;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> node.val;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addAtHead</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        addAtIndex(<span class="number">0</span>, val);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addAtTail</span><span class="params">(<span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        addAtIndex(size, val);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addAtIndex</span><span class="params">(<span class="keyword">int</span> index, <span class="keyword">int</span> val)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (index &gt; size) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode cur = head.next;</span><br><span class="line">        ListNode pre = head;</span><br><span class="line">        ListNode node = <span class="keyword">new</span> ListNode(val);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(index-- &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            cur = cur.next;</span><br><span class="line">            pre = pre.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        pre.next = node;</span><br><span class="line">        node.next = cur;</span><br><span class="line">        size++;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">deleteAtIndex</span><span class="params">(<span class="keyword">int</span> index)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(index &lt; <span class="number">0</span> || index &gt;= size) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        ListNode cur = head.next;</span><br><span class="line">        ListNode pre = head;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">while</span>(index-- &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            cur = cur.next;</span><br><span class="line">            pre = pre.next;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        pre.next = cur.next;</span><br><span class="line">        size--;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//题目的意思其实是根据单链表或者双链表来实现一个更强的链表。所以Listnode可以随便用，一开始没意识到这一点，所以有点无从下笔。其次，设置一个size和虚拟头节点也很关键！</span></span><br></pre></td></tr></table></figure>
+
+  </div>
+
+   <footer>
+
+    <div class="meta">
+  <span class="item">
+    <span class="icon">
+      <i class="ic i-calendar-check"></i>
+    </span>
+    <span class="text">Edited on</span>
+    <time title="Modified: 2023-04-18 23:52:08" itemprop="dateModified" datetime="2023-04-18T23:52:08+08:00">2023-04-18</time>
+  </span>
+  <span id="2023/04/19/4.18算法记录/" class="item leancloud_visitors" data-flag-title="4.18算法记录" title="Views">
+      <span class="icon">
+        <i class="ic i-eye"></i>
+      </span>
+      <span class="text">Views</span>
+      <span class="leancloud-visitors-count"></span>
+      <span class="text">times</span>
+  </span>
+</div>
+
+      
+<div class="reward">
+  <button><i class="ic i-heartbeat"></i> Donate</button>
+  <p>Give me a cup of [coffee]~(￣▽￣)~*</p>
+  <div id="qr">
+      
+      <div>
+        <img data-src="/images/wechatpay.png" alt="deku酱 WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/alipay.png" alt="deku酱 Alipay">
+        <p>Alipay</p>
+      </div>
+      
+      <div>
+        <img data-src="/images/paypal.png" alt="deku酱 PayPal">
+        <p>PayPal</p>
+      </div>
+  </div>
+</div>
+
+      
+
+<div id="copyright">
+<ul>
+  <li class="author">
+    <strong>Post author:  </strong>deku酱 <i class="ic i-at"><em>@</em></i>hc‘s blog
+  </li>
+  <li class="link">
+    <strong>Post link: </strong>
+    <a href="http://example.com/2023/04/19/4.18%E7%AE%97%E6%B3%95%E8%AE%B0%E5%BD%95/" title="4.18算法记录">http://example.com/2023/04/19/4.18算法记录/</a>
+  </li>
+  <li class="license">
+    <strong>Copyright Notice:  </strong>All articles in this blog are licensed under <span class="exturl" data-url="aHR0cHM6Ly9jcmVhdGl2ZWNvbW1vbnMub3JnL2xpY2Vuc2VzL2J5LW5jLXNhLzQuMC9kZWVkLnpo"><i class="ic i-creative-commons"><em>(CC)</em></i>BY-NC-SA</span> unless stating additionally.
+  </li>
+</ul>
+</div>
+
+  </footer>
+
+</article>
+
+  </div>
+  
+
+<div class="post-nav">
+    <div class="item left">
+      
+
+  <a href="/2022/08/28/Spring%E4%BE%9D%E8%B5%96%E6%B3%A8%E5%85%A5%E6%9C%89%E5%87%A0%E7%A7%8D%EF%BC%9F%E5%90%84%E8%87%AA%E6%9C%89%E4%BB%80%E4%B9%88%E4%BC%98%E7%BC%BA%E7%82%B9%EF%BC%9F/" itemprop="url" rel="prev" data-background-image="https:&#x2F;&#x2F;i.imgtg.com&#x2F;2023&#x2F;03&#x2F;10&#x2F;YwC46.jpg" title="Spring依赖注入有几种？各自有什么优缺点？">
+  <span class="type">Previous Post</span>
+  <span class="category"><i class="ic i-flag"></i> Java</span>
+  <h3>Spring依赖注入有几种？各自有什么优缺点？</h3>
+  </a>
+
+    </div>
+    <div class="item right">
+    </div>
+</div>
+
+  
+  <div class="wrap" id="comments"></div>
+
+
+        </div>
+        <div id="sidebar">
+          
+
+<div class="inner">
+
+  <div class="panels">
+    <div class="inner">
+      <div class="contents panel pjax" data-title="Contents">
+      </div>
+      <div class="related panel pjax" data-title="Related">
+        <ul>
+          <li class="active"><a href="/2023/04/19/4.18%E7%AE%97%E6%B3%95%E8%AE%B0%E5%BD%95/" rel="bookmark" title="4.18算法记录">4.18算法记录</a></li>
+        </ul>
+      </div>
+      <div class="overview panel" data-title="Overview">
+        <div class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <img class="image" itemprop="image" alt="deku酱"
+      data-src="/images/avatar.jpg">
+  <p class="name" itemprop="name">deku酱</p>
+  <div class="description" itemprop="description"></div>
+</div>
+
+<nav class="state">
+    <div class="item posts">
+      <a href="/archives/">
+        <span class="count">25</span>
+        <span class="name">posts</span>
+      </a>
+    </div>
+    <div class="item categories">
+      <a href="/categories/">
+        <span class="count">11</span>
+        <span class="name">categories</span>
+      </a>
+    </div>
+</nav>
+
+<div class="social">
+      <span class="exturl item github" data-url="aHR0cHM6Ly9naXRodWIuY29tL3Nub3ctbWFuOQ==" title="https:&#x2F;&#x2F;github.com&#x2F;snow-man9"><i class="ic i-github"></i></span>
+</div>
+
+<ul class="menu">
+  
+    
+  <li class="item">
+    <a href="/" rel="section"><i class="ic i-home"></i>Home</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/about/" rel="section"><i class="ic i-user"></i>About</a>
+  </li>
+
+        
+  <li class="item dropdown">
+      <a href="javascript:void(0);"><i class="ic i-feather"></i>Posts</a>
+    <ul class="submenu">
+
+        
+  <li class="item">
+    <a href="/archives/" rel="section"><i class="ic i-list-alt"></i>Archives</a>
+  </li>
+
+        
+  <li class="item">
+    <a href="/categories/" rel="section"><i class="ic i-th"></i>Categories</a>
+  </li>
+
+  </ul>
+    
+  <li class="item">
+    <a href="/friends/" rel="section"><i class="ic i-heart"></i>Friends</a>
+  </li>
+
+    
+  <li class="item">
+    <a href="/links/" rel="section"><i class="ic i-magic"></i>Links</a>
+  </li>
+
+
+</ul>
+
+      </div>
+    </div>
+  </div>
+
+  <ul id="quick">
+    <li class="prev pjax">
+    </li>
+    <li class="up"><i class="ic i-arrow-up"></i></li>
+    <li class="down"><i class="ic i-arrow-down"></i></li>
+    <li class="next pjax">
+    </li>
+    <li class="percent"></li>
+  </ul>
+</div>
+
+
+        </div>
+        <div class="dimmer"></div>
+      </div>
+    </main>
+    <footer id="footer">
+      <div class="inner">
+        <div class="widgets">
+          
+<div class="rpost pjax">
+  <h2>Random Posts</h2>
+  <ul>
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E7%AE%97%E6%B3%95/" title="In 算法">算法</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/2023%E7%A7%8B%E6%8B%9B%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="In 2023秋招学习记录">2023秋招学习记录</a>
+</div>
+
+    <span><a href="/2023/04/19/4.18%E7%AE%97%E6%B3%95%E8%AE%B0%E5%BD%95/" title="4.18算法记录">4.18算法记录</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%84%9F%E6%83%B3/" title="In 感想">感想</a>
+</div>
+
+    <span><a href="/2021/03/03/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2/" title="我的第一篇博客">我的第一篇博客</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/ARM-TrustZone/" title="In ARM TrustZone">ARM TrustZone</a>
+</div>
+
+    <span><a href="/2021/09/01/OP-TEE%E4%B8%ADCA%E6%8E%A5%E5%8F%A3%E8%B0%83%E7%94%A8%E7%9A%84%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B------%E7%B3%BB%E7%BB%9F%E5%90%84%E5%B1%82%E9%9D%A2%E5%85%B3%E7%B3%BB/" title="OP-TEE中CA接口调用的完整流程--系统各层面关系">OP-TEE中CA接口调用的完整流程--系统各层面关系</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Java/" title="In Java">Java</a>
+</div>
+
+    <span><a href="/2022/08/21/%E5%A4%9A%E7%BB%A7%E6%89%BF%E9%97%AE%E9%A2%98/" title="多继承问题">多继承问题</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Java/" title="In Java">Java</a>
+</div>
+
+    <span><a href="/2022/08/19/java%E4%B8%AD%E7%9A%84%E5%A4%9A%E6%80%81/" title="java中的多态">java中的多态</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E8%81%94%E9%82%A6%E5%AD%A6%E4%B9%A0/" title="In 联邦学习">联邦学习</a>
+</div>
+
+    <span><a href="/2021/03/06/3.6%E4%B8%BA%E4%BA%86%E8%82%9D%E5%91%A8%E6%8A%A5%E7%9A%84%E5%AD%A6%E4%B9%A0/" title="横向联邦学习">横向联邦学习</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+</div>
+
+    <span><a href="/2021/03/02/hello-world/" title="Hello World">Hello World</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/" title="In 数据库">数据库</a>
+<i class="ic i-angle-right"></i>
+<a href="/categories/%E7%BC%93%E5%AD%98/" title="In 缓存">缓存</a>
+</div>
+
+    <span><a href="/2022/08/28/%E5%A6%82%E4%BD%95%E4%BF%9D%E8%AF%81%E6%95%B0%E6%8D%AE%E5%BA%93%E5%92%8C%E7%BC%93%E5%AD%98%E7%9A%84%E5%8F%8C%E5%86%99%E4%B8%80%E8%87%B4%E6%80%A7%EF%BC%9F/" title="如何保证数据库和缓存双写一致性？">如何保证数据库和缓存双写一致性？</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/%E7%BD%91%E7%BB%9C/" title="In 网络">网络</a>
+</div>
+
+    <span><a href="/2022/08/28/%E8%BE%93%E5%85%A5URL%E4%B9%8B%E5%90%8E%E4%BC%9A%E6%89%A7%E8%A1%8C%E4%BB%80%E4%B9%88/" title="输入URL之后会执行什么">输入URL之后会执行什么</a></span>
+  </li>
+
+      
+  <li class="item">
+    
+<div class="breadcrumb">
+<a href="/categories/Java/" title="In Java">Java</a>
+</div>
+
+    <span><a href="/2022/08/22/%E6%96%B9%E6%B3%95%E9%87%8D%E5%86%99%E5%92%8C%E9%87%8D%E8%BD%BD/" title="方法重写和重载">方法重写和重载</a></span>
+  </li>
+
+  </ul>
+</div>
+<div>
+  <h2>Recent Comments</h2>
+  <ul class="leancloud-recent-comment"></ul>
+</div>
+
+        </div>
+        <div class="status">
+  <div class="copyright">
+    
+    &copy; 2010 – 
+    <span itemprop="copyrightYear">2023</span>
+    <span class="with-love">
+      <i class="ic i-sakura rotate"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">deku酱 @ Yume Shoka</span>
+  </div>
+  <div class="powered-by">
+    Powered by <span class="exturl" data-url="aHR0cHM6Ly9oZXhvLmlv">Hexo</span> & Theme.<span class="exturl" data-url="aHR0cHM6Ly9naXRodWIuY29tL2FtZWhpbWUvaGV4by10aGVtZS1zaG9rYQ==">Shoka</span>
+  </div>
+</div>
+
+      </div>
+    </footer>
+  </div>
+<script data-config type="text/javascript">
+  var LOCAL = {
+    path: '2023/04/19/4.18算法记录/',
+    favicon: {
+      show: "（●´3｀●）Goooood",
+      hide: "(´Д｀)Booooom"
+    },
+    search : {
+      placeholder: "Search for Posts",
+      empty: "We didn't find any results for the search: ${query}",
+      stats: "${hits} results found in ${time} ms"
+    },
+    valine: true,fancybox: true,
+    copyright: 'Copied to clipboard successfully! <br> All articles in this blog are licensed under <i class="ic i-creative-commons"></i>BY-NC-SA.',
+    ignores : [
+      function(uri) {
+        return uri.includes('#');
+      },
+      function(uri) {
+        return new RegExp(LOCAL.path+"$").test(uri);
+      }
+    ]
+  };
+</script>
+
+<script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
+
+<script src="//cdn.jsdelivr.net/combine/npm/pace-js@1.0.2/pace.min.js,npm/pjax@0.2.8/pjax.min.js,npm/whatwg-fetch@3.4.0/dist/fetch.umd.min.js,npm/animejs@3.2.0/lib/anime.min.js,npm/algoliasearch@4/dist/algoliasearch-lite.umd.js,npm/instantsearch.js@4/dist/instantsearch.production.min.js,npm/lozad@1/dist/lozad.min.js,npm/quicklink@2/dist/quicklink.umd.js"></script>
+
+<script src="/js/app.js?v=0.2.5"></script>
+
+
+
+
+</body>
+</html>
