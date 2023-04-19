@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>http://example.com</id>
+    <title>hc‘s blog • Posts by &#34;摆烂实录&#34; category</title>
+    <link href="http://example.com" />
+    <updated>2023-04-19T15:31:29.482Z</updated>
+    <entry>
+        <id>http://example.com/2023/04/19/4.19%E6%91%86%E7%83%82%E8%AE%B0%E5%BD%95/</id>
+        <title>4.19摆烂记录</title>
+        <link rel="alternate" href="http://example.com/2023/04/19/4.19%E6%91%86%E7%83%82%E8%AE%B0%E5%BD%95/"/>
+        <content type="html">&lt;p&gt;靠，睡觉了。今天没刷题。。。。。。。。。。感觉寄了&lt;/p&gt;
+</content>
+        <updated>2023-04-19T15:31:29.482Z</updated>
+    </entry>
+</feed>
